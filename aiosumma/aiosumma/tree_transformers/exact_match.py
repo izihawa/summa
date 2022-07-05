@@ -1,8 +1,11 @@
-from typing import Callable, Union
+from typing import (
+    Callable,
+    Union,
+)
 
 from ..parser.elements import (
     Boost,
-    Phrase,
+    Proximity,
     SearchField,
     SynonymsGroup,
     Word,
@@ -21,16 +24,16 @@ class ExactMatchTreeTransformer(TreeTransformer):
         self.score = score
 
     def visit_group(self, node, context, parents=None):
-        words = []
+        new_operands = []
         phrase = []
-        if len(node) <= 1:
+        phrase_len = len(node)
+        if phrase_len <= 1:
             return node, False
         for operand in node.operands:
+            new_operands.append(operand)
             if isinstance(operand, Word):
-                words.append(operand)
                 phrase.append(operand.value)
             elif isinstance(operand, SynonymsGroup):
-                words.append(operand.operands[0])
                 phrase.append(operand.operands[0].value)
             else:
                 return node, False
@@ -40,8 +43,8 @@ class ExactMatchTreeTransformer(TreeTransformer):
         if callable(score):
             score = score(node, context)
         if self.default_phrase_field:
-            words.append(Boost(SearchField(self.default_phrase_field, Phrase(phrase)), score))
+            new_operands.append(Boost(SearchField(self.default_phrase_field, Proximity(phrase, slop=3)), score))
         else:
-            words.append(Boost(Phrase(phrase), score))
-        node.operands = words
+            new_operands.append(Boost(Proximity(phrase, slop=3), score))
+        node.operands = new_operands
         return node, False

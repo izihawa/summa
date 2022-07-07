@@ -5,6 +5,7 @@ from typing import (
 
 from ..parser.elements import (
     Boost,
+    Phrase,
     Proximity,
     SearchField,
     SynonymsGroup,
@@ -35,16 +36,22 @@ class ExactMatchTreeTransformer(TreeTransformer):
                 phrase.append(operand.value)
             elif isinstance(operand, SynonymsGroup):
                 phrase.append(operand.operands[0].value)
+            elif isinstance(operand, SearchField):
+                continue
             else:
                 return node, False
+
+        if not phrase:
+            return node, False
+
         phrase = ' '.join(phrase)
 
         score = self.score
         if callable(score):
             score = score(node, context)
         if self.default_phrase_field:
-            new_operands.append(Boost(SearchField(self.default_phrase_field, Proximity(phrase, slop=3)), score))
+            new_operands.append(Boost(SearchField(self.default_phrase_field, Proximity(Phrase(phrase), slop=3)), score))
         else:
-            new_operands.append(Boost(Proximity(phrase, slop=3), score))
+            new_operands.append(Boost(Proximity(Phrase(phrase), slop=3), score))
         node.operands = new_operands
         return node, False

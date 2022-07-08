@@ -11,7 +11,7 @@ use std::collections::hash_map::Entry;
 use std::sync::Arc;
 use tantivy::schema::Schema as Fields;
 use tantivy::{Index, Opstamp, SegmentId, SegmentMeta};
-use tracing::{instrument, warn};
+use tracing::{info, instrument, warn};
 
 fn process_message(
     fields: &Fields,
@@ -150,7 +150,7 @@ impl IndexUpdater {
     #[instrument(skip(self))]
     pub(crate) async fn delete_consumer(&mut self, consumer_name: &str) -> SummaResult<()> {
         self.stop_consumers().await?.commit().await?;
-        self.commit_offsets()?;
+        self.commit_offsets().await?;
         self.index_config_proxy
             .write()
             .autosave()
@@ -167,7 +167,7 @@ impl IndexUpdater {
     #[instrument(skip(self))]
     pub(crate) async fn delete_all_consumers(&mut self) -> SummaResult<Vec<String>> {
         self.stop_consumers().await?.commit().await?;
-        self.commit_offsets()?;
+        self.commit_offsets().await?;
         let mut deleted_consumers_names: Vec<_> = Vec::new();
         for consumer in self.consumers.drain(..) {
             consumer.on_delete().await?;
@@ -179,6 +179,11 @@ impl IndexUpdater {
     /// Check if any consumers for the `IndexUpdater` exists
     pub(crate) fn has_consumers(&self) -> bool {
         !self.consumers.is_empty()
+    }
+
+    /// Delete `SummaDocument` by `primary_key`
+    pub(crate) fn delete_document(&self, primary_key_value: i64) -> SummaResult<Opstamp> {
+        self.index_writer_holder.delete_document_by_primary_key(primary_key_value)
     }
 
     /// Index generic `SummaDocument`
@@ -215,11 +220,11 @@ impl IndexUpdater {
 
     /// Commits Kafka offsets
     #[instrument(skip(self))]
-    fn commit_offsets(&self) -> SummaResult<()> {
+    async fn commit_offsets(&self) -> SummaResult<()> {
         for consumer in &self.consumers {
-            consumer.commit_offsets()?;
+            consumer.commit_offsets().await?;
         }
-        warn!(action = "committed_offsets");
+        info!(action = "committed_offsets");
         Ok(())
     }
 
@@ -227,7 +232,7 @@ impl IndexUpdater {
     #[instrument(skip(self), fields(index_name = ?self.index_name))]
     pub(crate) async fn commit(&mut self) -> SummaResult<Opstamp> {
         let opstamp = self.stop_consumers().await?.commit().await?;
-        self.commit_offsets()?;
+        self.commit_offsets().await?;
         self.start_consumers()?;
         Ok(opstamp)
     }
@@ -245,7 +250,7 @@ impl IndexUpdater {
         }
         index_writer_holder.commit().await?;
 
-        self.commit_offsets()?;
+        self.commit_offsets().await?;
         self.start_consumers()?;
         Ok(())
     }
@@ -262,7 +267,7 @@ impl IndexUpdater {
     pub(super) async fn stop_consumers_and_commit(mut self) -> SummaResult<Opstamp> {
         self.stop_consumers().await?;
         let opstamp = self.stop_consumers().await?.commit().await?;
-        self.commit_offsets()?;
+        self.commit_offsets().await?;
         Ok(opstamp)
     }
 }

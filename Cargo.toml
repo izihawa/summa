@@ -31,7 +31,7 @@ tempdir = "0.3.7"
 [dependencies]
 async-broadcast = "0.4.0"
 base64 = "0.13.0"
-clap = { version = "3.2.6", features = ["cargo"] }
+clap = { version = "3.2.15", features = ["cargo"] }
 colored = "2.0.0"
 config = "0.13.1"
 crossbeam-channel = "0.5.5"
@@ -41,7 +41,7 @@ futures = "0.3.21"
 futures-util = "0.3.21"
 hyper = "0.14.19"
 lazy_static = "1.4.0"
-opentelemetry = "0.17.0"
+opentelemetry = { version = "0.17.0", features = ["rt-tokio"] }
 opentelemetry-prometheus = "0.10.0"
 parking_lot = { version = "0.12.1", features = ["send_guard"] }
 path-absolutize = "3.0.13"

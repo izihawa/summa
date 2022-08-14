@@ -230,8 +230,8 @@ message Highlight {
 }
 
 message Snippet {
-  string fragment = 1;
-  repeated Highlight highlighted = 2;
+  bytes fragment = 1;
+  repeated Highlight highlights = 2;
 }
 
 message ScoredDocument {

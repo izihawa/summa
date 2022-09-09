@@ -37,9 +37,9 @@ async fn cast(index_holder: &IndexHolder) -> proto::Index {
     proto::Index {
         index_aliases: index_config_proxy.application_config().get_index_aliases_for_index(index_holder.index_name()),
         index_name: index_holder.index_name().to_owned(),
-        index_engine: format!("{:?}", index_config_proxy.get().index_engine),
+        index_engine: format!("{:?}", index_config_proxy.index_engine),
         num_docs: index_holder.index_reader().searcher().num_docs(),
-        compression: *index_holder.compression() as i32,
+        compression: index_holder.compression().await as i32,
     }
 }
 
@@ -69,7 +69,7 @@ impl proto::index_api_server::IndexApi for IndexApiImpl {
                 tokio::spawn(async move {
                     match index_updater.try_write() {
                         Err(_) => warn!(action = "busy"),
-                        Ok(mut index_updater) => match index_updater.commit(request.is_frozen).await {
+                        Ok(mut index_updater) => match index_updater.commit().await {
                             Ok(_) => (),
                             Err(error) => warn!(error = ?error),
                         },
@@ -84,7 +84,7 @@ impl proto::index_api_server::IndexApi for IndexApiImpl {
                 Err(_) => Err(Status::failed_precondition("busy")),
                 Ok(mut index_updater) => {
                     let now = Instant::now();
-                    let opstamp = index_updater.commit(request.is_frozen).await?;
+                    let opstamp = index_updater.commit().await?;
                     Ok(Response::new(proto::CommitIndexResponse {
                         opstamp: Some(opstamp),
                         elapsed_secs: Some(now.elapsed().as_secs_f64()),
@@ -245,7 +245,7 @@ impl proto::index_api_server::IndexApi for IndexApiImpl {
                 .index_updater()
                 .write()
                 .await
-                .vacuum(None)
+                .vacuum()
                 .instrument(info_span!("vacuum", index_name = ?index_name))
                 .await
                 .unwrap();

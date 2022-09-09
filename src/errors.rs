@@ -82,6 +82,8 @@ pub enum Error {
     FastEval(fasteval2::Error),
     #[error("hyper_error: {0}")]
     Hyper(hyper::Error),
+    #[error("hyper_http_error: {0}")]
+    HttpHyper(hyper::http::Error),
     #[error("infallible")]
     Infallible,
     #[error("internal_error")]
@@ -139,6 +141,12 @@ impl From<config::ConfigError> for Error {
 impl From<hyper::Error> for Error {
     fn from(error: hyper::Error) -> Self {
         Error::Hyper(error)
+    }
+}
+
+impl From<hyper::http::Error> for Error {
+    fn from(error: hyper::http::Error) -> Self {
+        Error::HttpHyper(error)
     }
 }
 

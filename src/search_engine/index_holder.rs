@@ -32,7 +32,6 @@ pub struct IndexHolder {
     autocommit_thread: Option<ThreadHandler>,
     /// Counters
     search_times_meter: ValueRecorder<f64>,
-    compression: proto::Compression,
 }
 
 /// Sets up standard Summa tokenizers
@@ -78,7 +77,7 @@ impl IndexHolder {
                                     _ = tick_task.tick() => {
                                         info!(action = "autocommit_thread_tick");
                                         if let Ok(mut index_updater) = index_updater.try_write() {
-                                            if let Err(error) = index_updater.commit(None).await {
+                                            if let Err(error) = index_updater.commit().await {
                                                 warn!(error = ?error);
                                             }
                                         }
@@ -105,8 +104,6 @@ impl IndexHolder {
             .with_description("Search times")
             .init();
 
-        let compression = index_updater.read().await.index().settings().docstore_compression.into();
-
         Ok(IndexHolder {
             index_name: String::from(index_name),
             autocommit_thread,
@@ -117,7 +114,6 @@ impl IndexHolder {
             index_updater,
             index_config_proxy,
             search_times_meter,
-            compression,
         })
     }
 
@@ -158,8 +154,8 @@ impl IndexHolder {
     }
 
     /// Compression
-    pub(crate) fn compression(&self) -> &proto::Compression {
-        &self.compression
+    pub(crate) async fn compression(&self) -> proto::Compression {
+        self.index_updater.read().await.index().settings().docstore_compression.into()
     }
 
     /// Index name
@@ -350,7 +346,7 @@ pub(crate) mod tests {
             Bullsquids, Vortigaunts, barnacles and antlions will all eat headcrabs and Vortigaunts can be seen cooking them in several locations in-game.",
             schema.get_field("issued_at").unwrap() => 1652986134i64
         )))?;
-        index_holder.index_updater().write().await.commit(None).await?;
+        index_holder.index_updater().write().await.commit().await?;
         index_holder.index_reader().reload()?;
         assert_eq!(
             index_holder.search("index", &match_query("headcrabs"), vec![top_docs_collector(10)]).await?,
@@ -399,7 +395,7 @@ pub(crate) mod tests {
             schema.get_field("body").unwrap() => "term1 term7 term8 term9 term10",
             schema.get_field("issued_at").unwrap() => 110i64
         )))?;
-        index_holder.index_updater().write().await.commit(None).await?;
+        index_holder.index_updater().write().await.commit().await?;
         index_holder.index_reader().reload()?;
         assert_eq!(
             index_holder

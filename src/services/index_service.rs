@@ -127,7 +127,7 @@ impl IndexService {
         self.insert_config(&create_index_request).await?;
 
         let mut segment_attributes = HashMap::new();
-        segment_attributes.insert("is_frozen".to_string(), SegmentAttribute::ConjunctiveBool(create_index_request.is_frozen));
+        segment_attributes.insert("is_frozen".to_string(), SegmentAttribute::ConjunctiveBool(false));
 
         let index_settings = IndexSettings {
             docstore_compression: create_index_request.compression,
@@ -166,7 +166,7 @@ impl IndexService {
                 _ => Some(sort_by_field),
             }
         }
-        index_updater.commit(None).await?;
+        index_updater.commit().await?;
         Ok(index_holder)
     }
 

@@ -14,10 +14,16 @@ message AttachIndexRequest {
 
 message AttachIndexResponse {}
 
+message PublishedFile {
+  string name = 1;
+  string hash = 2;
+  uint64 size = 3;
+}
+
 message PublishIndexRequest {
   string index_alias = 1;
 }
 
 message PublishIndexResponse {
-  string ipfs_multihash = 1;
+  repeated PublishedFile published_files = 1;
 }

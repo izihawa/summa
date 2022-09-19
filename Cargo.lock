@@ -403,16 +403,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ctor"
-version = "0.1.23"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cdffe87e1d521a10f9696f833fe502293ea446d7f256c06128293a4119bdf4cb"
-dependencies = [
- "quote",
- "syn",
-]
-
-[[package]]
 name = "darling"
 version = "0.14.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -489,12 +479,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "diff"
-version = "0.1.13"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "56254986775e3233ffa9c4d7d3faaf6d36a2c09d30b20687e9f88bc8bafc16c8"
-
-[[package]]
 name = "digest"
 version = "0.10.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -554,9 +538,10 @@ checksum = "cd7d5c9e2fb96ea7b093da40c584cb3060eddbe0d4db8abcea655b197156d94e"
 [[package]]
 name = "fastfield_codecs"
 version = "0.2.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#6630ec9aed247bad66ae048b6f78236701e6a72e"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#9ed271c2e7ceb91813be2d24080bfdb5bb08b5aa"
 dependencies = [
  "fastdivide",
+ "itertools",
  "log",
  "ownedbytes",
  "tantivy-bitpacker",
@@ -1266,18 +1251,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9ff7415e9ae3fff1225851df9e0d9e4e5479f947619774677a63572e55e80eff"
 
 [[package]]
-name = "output_vt100"
-version = "0.1.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "628223faebab4e3e40667ee0b2336d34a5b960ff60ea743ddfdbcf7770bcfb66"
-dependencies = [
- "winapi",
-]
-
-[[package]]
 name = "ownedbytes"
 version = "0.3.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#6630ec9aed247bad66ae048b6f78236701e6a72e"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#9ed271c2e7ceb91813be2d24080bfdb5bb08b5aa"
 dependencies = [
  "stable_deref_trait",
 ]
@@ -1432,18 +1408,6 @@ name = "ppv-lite86"
 version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
-
-[[package]]
-name = "pretty_assertions"
-version = "1.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a25e9bcb20aa780fd0bb16b72403a9064d6b3f22f026946029acb941a50af755"
-dependencies = [
- "ctor",
- "diff",
- "output_vt100",
- "yansi",
-]
 
 [[package]]
 name = "prettyplease"
@@ -1995,7 +1959,7 @@ checksum = "f764005d11ee5f36500a149ace24e00e3da98b0158b3e2d53a7495660d3f4d60"
 [[package]]
 name = "tantivy"
 version = "0.18.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#6630ec9aed247bad66ae048b6f78236701e6a72e"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#9ed271c2e7ceb91813be2d24080bfdb5bb08b5aa"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -2025,7 +1989,6 @@ dependencies = [
  "once_cell",
  "oneshot",
  "ownedbytes",
- "pretty_assertions",
  "rayon",
  "regex",
  "rust-stemmers",
@@ -2049,12 +2012,12 @@ dependencies = [
 [[package]]
 name = "tantivy-bitpacker"
 version = "0.2.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#6630ec9aed247bad66ae048b6f78236701e6a72e"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#9ed271c2e7ceb91813be2d24080bfdb5bb08b5aa"
 
 [[package]]
 name = "tantivy-common"
 version = "0.3.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#6630ec9aed247bad66ae048b6f78236701e6a72e"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#9ed271c2e7ceb91813be2d24080bfdb5bb08b5aa"
 dependencies = [
  "byteorder",
  "ownedbytes",
@@ -2074,7 +2037,7 @@ dependencies = [
 [[package]]
 name = "tantivy-query-grammar"
 version = "0.18.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#6630ec9aed247bad66ae048b6f78236701e6a72e"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#9ed271c2e7ceb91813be2d24080bfdb5bb08b5aa"
 dependencies = [
  "combine",
  "once_cell",
@@ -2751,12 +2714,6 @@ checksum = "56c1936c4cc7a1c9ab21a1ebb602eb942ba868cbd44a99cb7cdc5892335e1c85"
 dependencies = [
  "linked-hash-map",
 ]
-
-[[package]]
-name = "yansi"
-version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09041cd90cf85f7f8b2df60c646f853b7f535ce68f85244eb6731cf89fa498ec"
 
 [[package]]
 name = "zstd"

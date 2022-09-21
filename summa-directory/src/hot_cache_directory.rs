@@ -23,12 +23,11 @@ use std::path::{Path, PathBuf};
 use std::sync::Arc;
 use std::{fmt, io};
 
-use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
 use tantivy::directory::error::OpenReadError;
 use tantivy::directory::{FileHandle, FileSlice, OwnedBytes};
 use tantivy::error::DataCorruption;
-use tantivy::{AsyncIoResult, Directory, HasLen, Index, IndexReader, ReloadPolicy};
+use tantivy::{Directory, HasLen, Index, IndexReader, ReloadPolicy};
 
 use crate::caching_directory::CachingDirectory;
 use crate::debug_proxy_directory::DebugProxyDirectory;
@@ -369,20 +368,12 @@ struct FileSliceWithCache {
     file_length: u64,
 }
 
-#[async_trait]
 impl FileHandle for FileSliceWithCache {
     fn read_bytes(&self, byte_range: Range<usize>) -> io::Result<OwnedBytes> {
         if let Some(found_bytes) = self.static_cache.try_read_bytes(byte_range.clone()) {
             return Ok(found_bytes);
         }
         self.underlying.read_bytes_slice(byte_range)
-    }
-
-    async fn read_bytes_async(&self, byte_range: Range<usize>) -> AsyncIoResult<OwnedBytes> {
-        if let Some(found_bytes) = self.static_cache.try_read_bytes(byte_range.clone()) {
-            return Ok(found_bytes);
-        }
-        self.underlying.read_bytes_slice_async(byte_range).await
     }
 }
 

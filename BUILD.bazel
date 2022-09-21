@@ -55,3 +55,13 @@ container_push(
    repository = "izihawa/summa-server",
    tag = "latest",
 )
+
+container_push(
+   name = "push-summa-server-testing",
+   image = ":summa-server-image",
+   format = "Docker",
+   registry = "index.docker.io",
+   repository = "izihawa/summa-server",
+   tag = "testing",
+)
+

@@ -147,7 +147,7 @@ preshed==3.0.6
     #   -r requirements.txt
     #   spacy
     #   thinc
-protobuf==4.21.2
+protobuf==4.21.6
     # via
     #   -r requirements.txt
     #   aiogrpcclient

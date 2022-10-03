@@ -548,7 +548,7 @@ checksum = "cd7d5c9e2fb96ea7b093da40c584cb3060eddbe0d4db8abcea655b197156d94e"
 [[package]]
 name = "fastfield_codecs"
 version = "0.2.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#cc9dee3af29f9b9deda9c20181139425d012ea92"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#74e0c3c2094ccd64af6705a195ff13a0387eca98"
 dependencies = [
  "fastdivide",
  "itertools",
@@ -1324,7 +1324,7 @@ checksum = "9ff7415e9ae3fff1225851df9e0d9e4e5479f947619774677a63572e55e80eff"
 [[package]]
 name = "ownedbytes"
 version = "0.3.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#cc9dee3af29f9b9deda9c20181139425d012ea92"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#74e0c3c2094ccd64af6705a195ff13a0387eca98"
 dependencies = [
  "stable_deref_trait",
 ]
@@ -2166,7 +2166,7 @@ dependencies = [
  "summa-proto",
  "take_mut",
  "tantivy",
- "tantivy-fst",
+ "tantivy-fst 0.3.0",
  "tempdir",
  "textwrap",
  "thiserror",
@@ -2232,7 +2232,7 @@ checksum = "f764005d11ee5f36500a149ace24e00e3da98b0158b3e2d53a7495660d3f4d60"
 [[package]]
 name = "tantivy"
 version = "0.18.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#cc9dee3af29f9b9deda9c20181139425d012ea92"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#74e0c3c2094ccd64af6705a195ff13a0387eca98"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -2271,7 +2271,7 @@ dependencies = [
  "stable_deref_trait",
  "tantivy-bitpacker",
  "tantivy-common",
- "tantivy-fst",
+ "tantivy-fst 0.4.0",
  "tantivy-query-grammar",
  "tempfile",
  "thiserror",
@@ -2284,12 +2284,12 @@ dependencies = [
 [[package]]
 name = "tantivy-bitpacker"
 version = "0.2.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#cc9dee3af29f9b9deda9c20181139425d012ea92"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#74e0c3c2094ccd64af6705a195ff13a0387eca98"
 
 [[package]]
 name = "tantivy-common"
 version = "0.3.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#cc9dee3af29f9b9deda9c20181139425d012ea92"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#74e0c3c2094ccd64af6705a195ff13a0387eca98"
 dependencies = [
  "byteorder",
  "ownedbytes",
@@ -2307,9 +2307,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "tantivy-fst"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fc3c506b1a8443a3a65352df6382a1fb6a7afe1a02e871cee0d25e2c3d5f3944"
+dependencies = [
+ "byteorder",
+ "regex-syntax 0.6.27",
+ "utf8-ranges",
+]
+
+[[package]]
 name = "tantivy-query-grammar"
 version = "0.18.0"
-source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#cc9dee3af29f9b9deda9c20181139425d012ea92"
+source = "git+https://github.com/izihawa/tantivy?branch=feature/seg-attr#74e0c3c2094ccd64af6705a195ff13a0387eca98"
 dependencies = [
  "combine",
  "once_cell",

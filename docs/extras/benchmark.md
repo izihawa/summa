@@ -1,6 +1,6 @@
 ---
 title: Benchmark
-permalink: /benchmark
+parent: Extras
 ---
 
 Firstly, follow setup guide for [summa](/summa/quick-start#setup) and [ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)

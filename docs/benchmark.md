@@ -4,7 +4,7 @@ title: Benchmark
 permalink: /benchmark
 ---
 
-Firstly, follow setup guide for [summa](/summa-proto/quick-start#setup) and [ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
+Firstly, follow setup guide for [summa](/summa/quick-start#setup) and [ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
 
 ## Downloading Data
 

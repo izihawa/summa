@@ -26,7 +26,7 @@ curl -H "Content-Type: application/json" -s http://localhost:9200/books/_search 
 {% include import-data-to-summa-snippet.sh %}
 
 # Do a match query that returns top-10 documents and its total count
-summa-cli localhost:8082 - search books '{"match": {"value": "astronomy"}}' '[{"top_docs": {"limit": 10}}, {"count": {}}]'
+summa-cli localhost:8082 search '[{"index_alias": "books", "query": {"match": {"value": "astronomy"}}, "collectors": [{"top_docs": {"limit": 10}}, {"count": {}}]}]'
 ```
 
 ## Benchmarking

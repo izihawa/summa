@@ -1,6 +1,7 @@
 ---
 # yamllint disable rule:key-ordering
 index_name: books
+index_engine: Memory
 compression: Zstd
 index_attributes:
   multi_fields: ["category"]

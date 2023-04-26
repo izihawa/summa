@@ -23,6 +23,24 @@ curl -H "Content-Type: application/json" -s http://localhost:9200/books/_search 
 
 ## Preparing Summa
 
+### Create Index
+Summa is a schemaful search engines. It requires from you to define fields what you are going to use. Let's create
+a schema for WikiBooks:
+
+```bash
+# Create index schema in file
+cat << EOF > schema.yaml
+{% include summa-wiki-schema.yaml %}
+EOF
+```
+
+```bash
+# Create index
+summa-cli localhost:8082 - create-index-from-file schema.yaml
+```
+
+### Add documents
+
 ```bash
 {% include import-data-to-summa-snippet.sh %}
 

@@ -5,7 +5,7 @@ import grpc
 from . import query_pb2 as query__pb2
 
 
-class SearchApiStub(object):
+class PublicApiStub(object):
     """Searches documents in the stored indices
     """
 
@@ -16,13 +16,13 @@ class SearchApiStub(object):
             channel: A grpc.Channel.
         """
         self.search = channel.unary_unary(
-                '/summa.proto.SearchApi/search',
+                '/summa.proto.PublicApi/search',
                 request_serializer=query__pb2.SearchRequest.SerializeToString,
                 response_deserializer=query__pb2.SearchResponse.FromString,
                 )
 
 
-class SearchApiServicer(object):
+class PublicApiServicer(object):
     """Searches documents in the stored indices
     """
 
@@ -34,7 +34,7 @@ class SearchApiServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_SearchApiServicer_to_server(servicer, server):
+def add_PublicApiServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'search': grpc.unary_unary_rpc_method_handler(
                     servicer.search,
@@ -43,12 +43,12 @@ def add_SearchApiServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'summa.proto.SearchApi', rpc_method_handlers)
+            'summa.proto.PublicApi', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class SearchApi(object):
+class PublicApi(object):
     """Searches documents in the stored indices
     """
 
@@ -63,7 +63,7 @@ class SearchApi(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/summa.proto.SearchApi/search',
+        return grpc.experimental.unary_unary(request, target, '/summa.proto.PublicApi/search',
             query__pb2.SearchRequest.SerializeToString,
             query__pb2.SearchResponse.FromString,
             options, channel_credentials,

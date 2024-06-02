@@ -82,7 +82,7 @@ fn cast_to_term(unique_field: &Field, full_path: &str, value: &OwnedValue) -> Ve
 
 #[inline]
 fn generate_id() -> String {
-    let mut data = [0u8; 16];
+    let mut data = [0u8; 32];
     rand::thread_rng().fill_bytes(&mut data);
     base36::encode(&data)
 }

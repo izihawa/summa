@@ -207,14 +207,14 @@ impl<'a> SummaDocument<'a> {
                     JsonValue::Array(json_items) => {
                         for json_item in json_items {
                             match value_from_json(field_type, json_item) {
-                                Ok(value) => doc.add_field_value(field, value),
+                                Ok(value) => doc.add_field_value(field, &value),
                                 Err(ValueParsingError::NullValueError) => continue,
                                 Err(error) => return Err(DocumentParsingError::ValueError(field_name.to_owned(), error).into()),
                             }
                         }
                     }
                     _ => match value_from_json(field_type, json_value) {
-                        Ok(value) => doc.add_field_value(field, value),
+                        Ok(value) => doc.add_field_value(field, &value),
                         Err(ValueParsingError::NullValueError) => continue,
                         Err(error) => return Err(DocumentParsingError::ValueError(field_name.to_owned(), error).into()),
                     },

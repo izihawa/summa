@@ -10,7 +10,7 @@ use summa_proto::proto;
 use tantivy::query::{
     AllQuery, BooleanQuery, BoostQuery, DisjunctionMaxQuery, EmptyQuery, MoreLikeThisQuery, Occur, PhraseQuery, Query, RangeQuery, RegexQuery, TermQuery,
 };
-use tantivy::schema::{Field, FieldEntry, FieldType, IndexRecordOption, Schema};
+use tantivy::schema::{Field, FieldEntry, FieldType, IndexRecordOption, OwnedValue, Schema};
 use tantivy::{Document, Index, Score, TantivyDocument, Term};
 use tracing::info;
 
@@ -160,12 +160,7 @@ impl ProtoQueryParser {
                 let value = range_query_proto.value.as_ref().ok_or(ValidationError::MissingRange)?;
                 let left = cast_value_to_bound_term(&field, full_path, field_entry.field_type(), &value.left, value.including_left)?;
                 let right = cast_value_to_bound_term(&field, full_path, field_entry.field_type(), &value.right, value.including_right)?;
-                Box::new(RangeQuery::new_term_bounds(
-                    range_query_proto.field.clone(),
-                    field_entry.field_type().value_type(),
-                    &left,
-                    &right,
-                ))
+                Box::new(RangeQuery::new(left, right))
             }
             proto::query::Query::Boost(boost_query_proto) => Box::new(BoostQuery::new(
                 self.parse_subquery(boost_query_proto.query.and_then(|query| query.query).ok_or(Error::EmptyQuery)?)?,
@@ -212,7 +207,7 @@ impl ProtoQueryParser {
                 let field_values = document
                     .get_sorted_field_values()
                     .into_iter()
-                    .map(|(field, field_values)| (field, field_values.into_iter().cloned().collect()))
+                    .map(|(field, field_values)| (field, field_values.into_iter().map(OwnedValue::from).collect::<Vec<_>>()))
                     .collect();
                 let mut query_builder = MoreLikeThisQuery::builder();
                 if let Some(min_doc_frequency) = more_like_this_query_proto.min_doc_frequency {

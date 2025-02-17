@@ -1,6 +1,5 @@
 use std::ops::RangeInclusive;
 
-use tantivy::json_utils::JsonTermWriter;
 use tantivy::query::{BitSetDocSet, ConstScorer, EnableScoring, Explanation, Query, Scorer, Weight};
 use tantivy::schema::{Field, IndexRecordOption};
 use tantivy::{DocId, Result, Score, SegmentReader, TantivyError, Term};
@@ -89,9 +88,7 @@ pub struct ExistsWeight {
 
 impl ExistsWeight {
     fn get_json_term(&self, json_path: &str) -> Term {
-        let mut term = Term::with_capacity(128);
-        let json_term_writer = JsonTermWriter::from_field_and_json_path(self.field, json_path, true, &mut term);
-        json_term_writer.term().clone()
+        Term::from_field_json_path(self.field, json_path, true)
     }
     fn generate_json_term_range(&self) -> RangeInclusive<Term> {
         let start_term_str = format!("{}\0", self.full_path);

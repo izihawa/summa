@@ -2,8 +2,8 @@ use summa_proto::proto;
 
 use crate::proto_traits::Wrapper;
 
-impl From<tantivy::Snippet> for Wrapper<proto::Snippet> {
-    fn from(snippet: tantivy::Snippet) -> Self {
+impl From<tantivy::snippet::Snippet> for Wrapper<proto::Snippet> {
+    fn from(snippet: tantivy::snippet::Snippet) -> Self {
         Wrapper::from(proto::Snippet {
             fragment: snippet.fragment().as_bytes().to_vec(),
             highlights: snippet

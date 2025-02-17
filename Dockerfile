@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM rust:1.79 as builder
+FROM --platform=$BUILDPLATFORM rust:1.84 as builder
 RUN apt-get update && apt-get install -y \
     g++-x86-64-linux-gnu libc6-dev-amd64-cross \
     g++-aarch64-linux-gnu libc6-dev-arm64-cross \

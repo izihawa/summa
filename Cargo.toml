@@ -46,9 +46,9 @@ serde_yaml = { version = "0.8" }
 strfmt = "0.2"
 summa-proto = { version = "0.36.1", path = "./summa-proto", default-features = false }
 take_mut = "0.2"
-tantivy = { package = "izihawa-tantivy", version = "0.22.6", default-features = false, features = ["quickwit", "sstable-termdict", "zstd-compression"] }
-tantivy-common = { package = "izihawa-tantivy-common", version = "0.7" }
-tantivy-query-grammar = { package = "izihawa-tantivy-query-grammar", version = "0.22" }
+tantivy = { package = "izihawa-tantivy", version = "0.25.1", default-features = false, features = ["quickwit", "zstd-compression"] }
+tantivy-common = { package = "izihawa-tantivy-common", version = "0.25.0" }
+tantivy-query-grammar = { package = "izihawa-tantivy-query-grammar", version = "0.25.0" }
 thiserror = "2.0"
 time = { version = "0.3", features = ["serde-well-known", "wasm-bindgen"] }
 tokio = { version = "1.43.0", default-features = false }

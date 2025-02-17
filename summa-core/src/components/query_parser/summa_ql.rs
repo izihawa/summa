@@ -287,12 +287,7 @@ impl QueryParser {
         let left = self.parse_boundary_word(*field, range_pairs.next().expect("grammar failure"))?;
         let right = self.parse_boundary_word(*field, range_pairs.next().expect("grammar failure"))?;
 
-        Ok(RangeQuery::new_term_bounds(
-            field_entry.name().to_string(),
-            field_entry.field_type().value_type(),
-            &left,
-            &right,
-        ))
+        Ok(RangeQuery::new(left, right))
     }
 
     pub fn parse_words(&self, field: Field, full_path: &str, option: &TextFieldIndexing, words: &str) -> Result<Vec<(usize, Term)>, QueryParserError> {

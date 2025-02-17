@@ -12,7 +12,7 @@ use tantivy::collector::{Collector, MultiCollector, MultiFruit};
 use tantivy::query::{EnableScoring, Query};
 use tantivy::schema::{Field, Schema};
 use tantivy::space_usage::SearcherSpaceUsage;
-use tantivy::{Directory, Executor, Index, IndexBuilder, IndexReader, Opstamp, ReloadPolicy, Searcher};
+use tantivy::{Directory, Index, IndexBuilder, IndexReader, Opstamp, ReloadPolicy, Searcher};
 use tokio::sync::RwLock;
 use tracing::{debug, info, instrument, trace, warn};
 

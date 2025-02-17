@@ -578,7 +578,6 @@ Request for index creation
 | schema | [string](#string) |  | Index schema in Tantivy format |
 | compression | [Compression](#summa-proto-Compression) |  | Compression for store |
 | blocksize | [uint32](#uint32) | optional | Size of store blocks |
-| sort_by_field | [SortByField](#summa-proto-SortByField) | optional | Field for sorting |
 | index_attributes | [IndexAttributes](#summa-proto-IndexAttributes) |  | Optional index fields |
 | merge_policy | [MergePolicy](#summa-proto-MergePolicy) |  | Merge policy |
 | query_parser_config | [QueryParserConfig](#summa-proto-QueryParserConfig) |  |  |

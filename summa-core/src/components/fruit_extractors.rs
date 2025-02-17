@@ -5,7 +5,7 @@ use rand::{Rng, SeedableRng};
 use summa_proto::proto;
 use tantivy::aggregation::agg_req::Aggregations;
 use tantivy::aggregation::agg_result::AggregationResults;
-use tantivy::aggregation::AggregationLimits;
+use tantivy::aggregation::AggregationLimitsGuard;
 use tantivy::collector::{FacetCounts, FruitHandle, MultiCollector, MultiFruit};
 use tantivy::query::Query;
 use tantivy::schema::Field;
@@ -193,7 +193,7 @@ pub fn build_fruit_extractor(
         Some(proto::collector::Collector::Aggregation(aggregation_collector_proto)) => {
             let agg_req: Aggregations = serde_json::from_str(&aggregation_collector_proto.aggregations)?;
             let aggregation_collector =
-                tantivy::aggregation::AggregationCollector::from_aggs(agg_req, AggregationLimits::new(Some(16_000_000_000), Some(100_000_000)));
+                tantivy::aggregation::AggregationCollector::from_aggs(agg_req, AggregationLimitsGuard::new(Some(16_000_000_000), Some(100_000_000)));
             Ok(Box::new(Aggregation(multi_collector.add_collector(aggregation_collector))) as Box<dyn FruitExtractor>)
         }
         None => Ok(Box::new(Count(multi_collector.add_collector(tantivy::collector::Count))) as Box<dyn FruitExtractor>),

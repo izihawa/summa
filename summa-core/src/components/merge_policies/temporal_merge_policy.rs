@@ -1,8 +1,9 @@
 use std::fmt::Debug;
 
 use serde::{Deserialize, Serialize};
+use tantivy::index::SegmentId;
 use tantivy::merge_policy::{MergeCandidate, MergePolicy};
-use tantivy::{SegmentId, SegmentMeta};
+use tantivy::SegmentMeta;
 use tracing::info;
 
 use crate::components::SummaSegmentAttributes;

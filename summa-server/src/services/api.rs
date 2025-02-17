@@ -4,20 +4,17 @@ use std::time::Duration;
 
 use async_broadcast::Receiver;
 use futures_util::future::try_join_all;
-use http_body_util::combinators::UnsyncBoxBody;
-use hyper::header::{HeaderName, HeaderValue};
 use proto::consumer_api_server::ConsumerApiServer;
 use proto::index_api_server::IndexApiServer;
 use proto::public_api_server::PublicApiServer;
 use proto::reflection_api_server::ReflectionApiServer;
 use proto::search_api_server::SearchApiServer;
 use summa_core::configs::ConfigProxy;
-use summa_core::utils::random::generate_request_id;
 use summa_proto::proto;
 use tokio_stream::wrappers::TcpListenerStream;
 use tonic::codec::CompressionEncoding;
 use tonic::transport::Server;
-use tracing::{info, info_span, instrument, warn, Instrument, Span};
+use tracing::{info, info_span, instrument, Instrument};
 
 use crate::apis::consumer::ConsumerApiImpl;
 use crate::apis::index::IndexApiImpl;
@@ -35,10 +32,6 @@ pub struct Api {
 }
 
 impl Api {
-    fn set_span(request: &hyper::Request<UnsyncBoxBody<bytes::Bytes, tonic::Status>>) -> Span {
-        info_span!("request",)
-    }
-
     fn set_listener(endpoint: &str) -> SummaServerResult<tokio::net::TcpListener> {
         let std_listener = std::net::TcpListener::bind(endpoint)?;
         std_listener.set_nonblocking(true)?;

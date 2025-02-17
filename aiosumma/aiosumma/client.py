@@ -253,7 +253,6 @@ class SummaClient(BaseGrpcClient):
             index_engine: dict,
             compression: Optional[Union[str, int]] = None,
             blocksize: Optional[int] = None,
-            sort_by_field: Optional[Tuple] = None,
             index_attributes: Optional[Dict] = None,
             merge_policy: Optional[Dict] = None,
             query_parser_config: Optional[Dict] = None,
@@ -274,7 +273,6 @@ class SummaClient(BaseGrpcClient):
             query_parser_config: describes how to parse queries by default.
             request_id: request id
             session_id: session id
-            sort_by_field: (field_name, order)
         """
         if isinstance(compression, str):
             compression = index_service_pb.Compression.Value(compression)
@@ -294,10 +292,6 @@ class SummaClient(BaseGrpcClient):
                 compression=compression,
                 blocksize=blocksize,
                 index_attributes=index_attributes,
-                sort_by_field=index_service_pb.SortByField(
-                    field=sort_by_field[0],
-                    order=sort_by_field[1].capitalize(),
-                ) if sort_by_field else None,
                 merge_policy=index_service_pb.MergePolicy(**(merge_policy or {})),
                 query_parser_config=query_parser_config_pb,
                 **index_engine

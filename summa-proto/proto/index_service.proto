@@ -148,7 +148,6 @@ message IndexAttributes {
   optional string description = 6;
   ConflictStrategy conflict_strategy = 8;
   repeated MappedField mapped_fields = 9;
-  optional string auto_id_field = 10;
 }
 
 // Request for index creation
@@ -166,8 +165,6 @@ message CreateIndexRequest {
   Compression compression = 3;
   // Size of store blocks
   optional uint32 blocksize = 4;
-  // Field for sorting
-  optional SortByField sort_by_field = 5;
   // Optional index fields
   IndexAttributes index_attributes = 6;
   // Merge policy

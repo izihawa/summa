@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use base64::Engine;
 use prost::encoding::bool;
-use tantivy::json_utils::{convert_to_fast_value_and_get_term, JsonTermWriter};
+use tantivy::json_utils::convert_to_fast_value_and_append_to_json_term;
 use tantivy::schema::{Field, FieldType};
 use tantivy::Term;
 use tantivy_common::DateTime;
@@ -14,20 +14,22 @@ pub fn cast_field_to_term(field: &Field, full_path: &str, field_type: &FieldType
     match field_type {
         FieldType::Str(_) => Term::from_field_text(*field, value),
         FieldType::JsonObject(ref json_options) => {
-            let mut term = Term::with_capacity(128);
-            let mut json_term_writer = JsonTermWriter::from_field_and_json_path(*field, full_path, json_options.is_expand_dots_enabled(), &mut term);
+            let mut term = Term::from_field_json_path(*field, full_path, json_options.is_expand_dots_enabled());
             let is_quoted = value.len() >= 2 && value.starts_with('\"') && value.ends_with('\"');
             if is_quoted {
-                json_term_writer.set_str(&value[1..value.len() - 1]);
-                json_term_writer.term().clone()
+                term.append_type_and_str(&value[1..value.len() - 1]);
+                term
             } else if force_str {
-                json_term_writer.set_str(value);
-                json_term_writer.term().clone()
+                term.append_type_and_str(value);
+                term
             } else {
-                convert_to_fast_value_and_get_term(&mut json_term_writer, value).unwrap_or_else(|| {
-                    json_term_writer.set_str(value);
-                    json_term_writer.term().clone()
-                })
+                match convert_to_fast_value_and_append_to_json_term(term.clone(), value, false) {
+                    Some(term) => term,
+                    None => {
+                        term.append_type_and_str(value);
+                        term
+                    }
+                }
             }
         }
         _ => unreachable!(),

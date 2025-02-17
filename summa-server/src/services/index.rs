@@ -13,8 +13,9 @@ use summa_core::proto_traits::Wrapper;
 use summa_core::utils::sync::{Handler, OwningHandler};
 use summa_core::validators;
 use summa_proto::proto;
+use tantivy::index::SegmentId;
 use tantivy::store::ZstdCompressor;
-use tantivy::{IndexBuilder, SegmentId};
+use tantivy::IndexBuilder;
 use tokio::sync::RwLock;
 use tracing::{debug, error, info, info_span, instrument, warn, Instrument};
 
@@ -286,7 +287,6 @@ impl Index {
                 .map(|c| Wrapper::from(c).into())
                 .unwrap_or(tantivy::store::Compressor::Zstd(ZstdCompressor::default())),
             docstore_blocksize: create_index_request.blocksize.unwrap_or(32768) as usize,
-            sort_by_field: create_index_request.sort_by_field.map(|s| Wrapper::from(s).into()),
             ..Default::default()
         };
         let index_builder = tantivy::Index::builder()
@@ -765,7 +765,6 @@ pub(crate) mod tests {
                 schema: serde_yaml::to_string(schema).unwrap(),
                 compression: 0,
                 blocksize: None,
-                sort_by_field: None,
                 index_attributes: Some(proto::IndexAttributes { ..Default::default() }),
                 index_engine: Some(index_engine),
                 merge_policy: None,
@@ -784,7 +783,6 @@ pub(crate) mod tests {
                 schema: serde_yaml::to_string(&create_test_schema()).unwrap(),
                 compression: 0,
                 blocksize: None,
-                sort_by_field: None,
                 index_attributes: None,
                 index_engine: Some(proto::create_index_request::IndexEngine::Memory(proto::CreateMemoryEngineRequest {})),
                 merge_policy: None,
@@ -798,7 +796,6 @@ pub(crate) mod tests {
                 schema: serde_yaml::to_string(&create_test_schema()).unwrap(),
                 compression: 0,
                 blocksize: None,
-                sort_by_field: None,
                 index_attributes: None,
                 index_engine: Some(proto::create_index_request::IndexEngine::Memory(proto::CreateMemoryEngineRequest {})),
                 merge_policy: None,
@@ -824,7 +821,6 @@ pub(crate) mod tests {
                 schema: serde_yaml::to_string(&create_test_schema()).unwrap(),
                 compression: 0,
                 blocksize: None,
-                sort_by_field: None,
                 index_attributes: None,
                 index_engine: Some(proto::create_index_request::IndexEngine::File(proto::CreateFileEngineRequest {})),
                 merge_policy: None,
@@ -843,7 +839,6 @@ pub(crate) mod tests {
                 schema: serde_yaml::to_string(&create_test_schema()).unwrap(),
                 compression: 0,
                 blocksize: None,
-                sort_by_field: None,
                 index_attributes: None,
                 index_engine: Some(proto::create_index_request::IndexEngine::Memory(proto::CreateMemoryEngineRequest {})),
                 merge_policy: None,

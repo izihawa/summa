@@ -1,15 +1,15 @@
 use std::collections::{BTreeMap, HashSet};
 
 use serde::{Serialize, Serializer};
-use tantivy::schema::{Field, OwnedValue, Schema};
+use tantivy::schema::{Field, OwnedValue, Schema, Value as ValueTrait};
 use tantivy::{Document, TantivyDocument};
 
 /// `Value` is used for representing singular or multi-values of `tantivy::Document`
 ///
 /// Required because Tantivy operates with multi-values only and Summa provides an abstraction of singular fields
-pub enum Value<'a> {
-    SingleValue(Option<&'a OwnedValue>),
-    MultipleValue(Vec<&'a OwnedValue>),
+pub enum Value {
+    SingleValue(Option<OwnedValue>),
+    MultipleValue(Vec<OwnedValue>),
 }
 
 /// Internal representation of a document used for JSON
@@ -19,7 +19,7 @@ pub enum Value<'a> {
 /// as a `BTreeMap<String, Vec<Value>>`. It is base on `tantivy::schema::NamedFieldDocument`
 /// but with a support of multi fields
 #[derive(Serialize)]
-pub struct NamedFieldDocument<'a>(pub BTreeMap<&'a str, Value<'a>>);
+pub struct NamedFieldDocument<'a>(pub BTreeMap<&'a str, Value>);
 
 impl<'a> NamedFieldDocument<'a> {
     pub fn from_document(schema: &'a Schema, fields: &Option<HashSet<Field>>, multi_fields: &HashSet<Field>, document: &'a TantivyDocument) -> Self {
@@ -32,9 +32,9 @@ impl<'a> NamedFieldDocument<'a> {
                 }
             }
             let values = if multi_fields.contains(&field) {
-                Value::MultipleValue(field_values)
+                Value::MultipleValue(field_values.into_iter().map(|x| OwnedValue::from(x.as_value())).collect())
             } else {
-                Value::SingleValue(field_values.get(0).copied())
+                Value::SingleValue(field_values.get(0).map(|x| OwnedValue::from(x.as_value())))
             };
             field_map.insert(field_name, values);
         }
@@ -45,7 +45,7 @@ impl<'a> NamedFieldDocument<'a> {
     }
 }
 
-impl Serialize for Value<'_> {
+impl Serialize for Value {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: Serializer,

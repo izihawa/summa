@@ -895,7 +895,7 @@ pub(crate) mod tests {
         index_service.commit(&index_holder, false).await?;
 
         let search_response = index_holder
-            .search(
+            .search_async(
                 "index",
                 match_query("testtitle", vec!["title".to_string(), "body".to_string()]),
                 vec![top_docs_collector(10)],
@@ -944,7 +944,7 @@ pub(crate) mod tests {
         })
         .await??;
         assert!(index_holder
-            .search(
+            .search_async(
                 "test_index",
                 match_query("title1", vec!["title".to_string(), "body".to_string()]),
                 vec![top_docs_collector_with_eval_expr(1, "issued_at")],

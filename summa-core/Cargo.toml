@@ -22,6 +22,7 @@ tokio-rt = ["tokio/rt"]
 aho-corasick = "1.0"
 anyhow = { workspace = true }
 async-trait = { workspace = true }
+base36 = "0.0.1"
 base64 = { workspace = true }
 config = { workspace = true }
 csv = "1.2"
@@ -60,3 +61,4 @@ time = { workspace = true }
 tokio = { workspace = true, default-features = false, features = ["macros", "signal-hook-registry", "sync"] }
 tracing = { workspace = true }
 xmlparser = "0.13"
+chrono = "0.4.39"

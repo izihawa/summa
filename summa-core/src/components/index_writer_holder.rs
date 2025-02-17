@@ -3,13 +3,15 @@ use std::collections::HashSet;
 use std::path::Path;
 use std::sync::{Arc, RwLock};
 
+use chrono::{DateTime, Datelike};
+use rand::RngCore;
 use summa_proto::proto;
 use tantivy::index::SegmentId;
 use tantivy::merge_policy::MergePolicy;
 use tantivy::query::Query;
-use tantivy::schema::document::ReferenceValue;
 use tantivy::schema::document::ReferenceValueLeaf;
-use tantivy::schema::{Field, Value};
+use tantivy::schema::document::{CompactDocObjectIter, CompactDocValue, ReferenceValue};
+use tantivy::schema::{Field, FieldType, OwnedValue, Value};
 use tantivy::{Directory, Document, Index, IndexWriter, Opstamp, SegmentMeta, SingleSegmentIndexWriter, TantivyDocument, Term};
 use tracing::info;
 
@@ -17,6 +19,53 @@ use super::SummaSegmentAttributes;
 use crate::configs::core::WriterThreads;
 use crate::errors::{SummaResult, ValidationError};
 use crate::Error;
+
+fn extract_flatten<'a, T: AsRef<str>>(v: CompactDocValue<'a>, parts: &[T], buffer: &mut Vec<OwnedValue>) {
+    let mut current = v;
+    for (i, part) in parts.iter().enumerate() {
+        match current.as_value() {
+            ReferenceValue::Object(m) => {
+                for (key, value) in m {
+                    if key == part.as_ref() {
+                        current = value;
+                        break;
+                    }
+                }
+            }
+            ReferenceValue::Array(a) => {
+                for child in a {
+                    extract_flatten(child, &parts[i..], buffer)
+                }
+            }
+            _ => break,
+        }
+    }
+    if let ReferenceValue::Leaf(_) = current.as_value() {
+        buffer.push(OwnedValue::from(current))
+    }
+}
+fn extract_flatten_from_map<'a, T: AsRef<str>>(m: CompactDocObjectIter<'a>, parts: &[T], buffer: &mut Vec<OwnedValue>) {
+    for (key, value) in m {
+        if key == parts[0].as_ref() {
+            match value.as_value() {
+                ReferenceValue::Leaf(_) => {}
+                ReferenceValue::Array(a) => {
+                    for child in a {
+                        extract_flatten(child, &parts[1..], buffer)
+                    }
+                }
+                ReferenceValue::Object(child) => extract_flatten_from_map(child, &parts[1..], buffer),
+            }
+        }
+    }
+}
+
+#[inline]
+fn generate_id() -> String {
+    let mut data = [0u8; 16];
+    rand::thread_rng().fill_bytes(&mut data);
+    base36::encode(&data)
+}
 
 /// Wrap `tantivy::SingleSegmentIndexWriter` and allows to recreate it
 pub struct SingleIndexWriter {
@@ -130,7 +179,7 @@ pub struct IndexWriterHolder {
     unique_fields: Vec<Field>,
     writer_threads: WriterThreads,
     writer_heap_size_bytes: usize,
-
+    auto_id_field: Option<Field>,
     extra_year_field: Option<(Field, Field)>,
     mapped_fields: Vec<((Field, Vec<String>), Field)>,
 }
@@ -145,6 +194,7 @@ impl IndexWriterHolder {
         index_writer: IndexWriterImpl,
         merge_policy: Arc<dyn MergePolicy>,
         unique_fields: Vec<Field>,
+        auto_id_field: Option<Field>,
         mapped_fields: Vec<((Field, Vec<String>), Field)>,
         writer_threads: WriterThreads,
         writer_heap_size_bytes: usize,
@@ -159,6 +209,7 @@ impl IndexWriterHolder {
             index_writer,
             merge_policy,
             unique_fields,
+            auto_id_field,
             writer_threads,
             writer_heap_size_bytes,
             extra_year_field,
@@ -213,8 +264,25 @@ impl IndexWriterHolder {
             })
             .transpose()?
             .unwrap_or_default();
-
-        IndexWriterHolder::new(index_writer, merge_policy, unique_fields, mapped_fields, writer_threads, writer_heap_size_bytes)
+        let auto_id_field = metas
+            .index_attributes()?
+            .and_then(|attributes: proto::IndexAttributes| {
+                attributes.auto_id_field.map(|auto_id_field| {
+                    schema
+                        .get_field(&auto_id_field)
+                        .or_else(|_| Err(ValidationError::MissingField(auto_id_field.to_string())))
+                })
+            })
+            .transpose()?;
+        IndexWriterHolder::new(
+            index_writer,
+            merge_policy,
+            unique_fields,
+            auto_id_field,
+            mapped_fields,
+            writer_threads,
+            writer_heap_size_bytes,
+        )
     }
 
     /// Delete index by its unique fields
@@ -275,8 +343,52 @@ impl IndexWriterHolder {
         self.index_writer.index()
     }
 
+    #[inline]
+    fn process_dynamic_fields(&self, document: &mut TantivyDocument) -> SummaResult<()> {
+        if let Some((extra_field, issued_at_field)) = self.extra_year_field {
+            if let Some(issued_at_value) = document.get_first(issued_at_field) {
+                if let Some(issued_at_value) = issued_at_value.as_i64() {
+                    if let Some(correct_timestamp) = DateTime::from_timestamp(issued_at_value, 0) {
+                        document.add_text(extra_field, correct_timestamp.year().to_string())
+                    }
+                }
+            }
+        }
+        let mut buffer = vec![];
+        for ((source_field, source_full_path), target_field) in &self.mapped_fields {
+            for value in document.get_all(*source_field) {
+                match value.as_value() {
+                    ReferenceValue::Object(entries) => extract_flatten_from_map(entries, source_full_path, &mut buffer),
+                    ReferenceValue::Leaf(leaf) => buffer.push(OwnedValue::from(value)),
+                    _ => unimplemented!(),
+                }
+            }
+            for v in &buffer {
+                document.add_field_value(*target_field, v)
+            }
+            buffer.clear();
+        }
+        Ok(())
+    }
+    #[inline]
+    fn setup_id_field(&self, document: &mut TantivyDocument) -> SummaResult<()> {
+        if let Some(auto_id_field) = &self.auto_id_field {
+            let schema = self.index_writer.index().schema();
+            match schema.get_field_entry(*auto_id_field).field_type() {
+                FieldType::Str(_) => match document.get_first(*auto_id_field) {
+                    Some(_) => {}
+                    None => document.add_text(*auto_id_field, generate_id()),
+                },
+                _ => unreachable!(),
+            }
+        }
+        Ok(())
+    }
+
     /// Put document to the index. Before comes searchable it must be committed
-    pub fn index_document(&self, document: TantivyDocument, conflict_strategy: proto::ConflictStrategy) -> SummaResult<()> {
+    pub fn index_document(&self, mut document: TantivyDocument, conflict_strategy: proto::ConflictStrategy) -> SummaResult<()> {
+        self.process_dynamic_fields(&mut document)?;
+        self.setup_id_field(&mut document)?;
         self.resolve_conflicts(&document, conflict_strategy)?;
         self.index_writer.add_document(document)?;
         Ok(())

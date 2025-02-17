@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["examples", "summa-core", "summa-proto", "summa-embed-py", "summa-server"]
+members = ["examples", "summa-core", "summa-proto", "summa-embed-py", "summa-server", "summa-wasm"]
 
 [profile.release]
 lto = true
@@ -11,32 +11,26 @@ anyhow = "1.0"
 async-broadcast = "0.7"
 async-trait = "0.1"
 base64 = "0.22"
-bytes = "1.3"
 clap = { version = "4.0", features = ["cargo"] }
 config = "0.14.0"
 derive_builder = "0.20.0"
-downcast-rs = "1.2"
 fasteval2 = { version = "2.1.1", features = ["unsafe-vars"] }
 futures = "0.3"
 http-body-util = "0.1"
 hyper = { version = "1", default-features = false, features = ["client", "http1", "http2"] }
-hyper-tls = { version = "0.6", features = ["vendored"] }
+hyper-tls = { version = "0.6" }
 hyper-util = { version = "0.1", features = ["server-graceful"] }
-instant = { version = "0.1", default-features = false, features = [ "inaccurate", "wasm-bindgen" ] }
-itertools = "0.14"
-lazy_static = "1.5"
-libz-sys = { version = "1.1", features = ["static"] }
-lru = "0.12"
-oneshot = "0.1"
 openssl = { version = "=0.10.55", features = ["vendored"] }
 openssl-src = { version = "=111" }
 openssl-sys = { version = "=0.9.89" }
+instant = { version = "0.1", default-features = false, features = [ "inaccurate", "wasm-bindgen" ] }
+itertools = "0.14"
+libz-sys = { version = "1.1", features = ["static"] }
 parking_lot = { version = "0.12", features = ["send_guard"] }
 pest = "2.7"
 pest_derive = "2.7"
 prost = "0.13"
 rand = { version = "0.8", features = ["small_rng"] }
-rayon = "1.10"
 regex = "1.11"
 serde = { version = "1.0", default-features = false, features = ["derive", "std"] }
 serde_bytes = "0.11"

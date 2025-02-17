@@ -1058,11 +1058,11 @@ mod tests {
         let query_parser = create_query_parser();
         assert_eq!(
             format!("{:?}", query_parser.parse_query("body:+(a b)")),
-            "Ok(BooleanQuery { subqueries: [(Must, BooleanQuery { subqueries: [(Should, TermQuery(Term(field=1, type=Str, \"a\"))), (Should, TermQuery(Term(field=1, type=Str, \"b\")))] })] })"
+            "Ok(BooleanQuery { subqueries: [(Must, BooleanQuery { subqueries: [(Should, TermQuery(Term(field=1, type=Str, \"a\"))), (Should, TermQuery(Term(field=1, type=Str, \"b\")))], minimum_number_should_match: 1 })], minimum_number_should_match: 0 })"
         );
         assert_eq!(
             format!("{:?}", query_parser.parse_query("body:-(a b)")),
-            "Ok(BooleanQuery { subqueries: [(MustNot, BooleanQuery { subqueries: [(Should, TermQuery(Term(field=1, type=Str, \"a\"))), (Should, TermQuery(Term(field=1, type=Str, \"b\")))] })] })"
+            "Ok(BooleanQuery { subqueries: [(MustNot, BooleanQuery { subqueries: [(Should, TermQuery(Term(field=1, type=Str, \"a\"))), (Should, TermQuery(Term(field=1, type=Str, \"b\")))], minimum_number_should_match: 1 })], minimum_number_should_match: 0 })"
         );
     }
 
@@ -1167,12 +1167,12 @@ mod tests {
             fields: vec![],
         });
         let query = query_parser.parse_query("old school holy-wood");
-        assert_eq!(format!("{:?}", query), "Ok(BooleanQuery { subqueries: [(Should, TermQuery(Term(field=0, type=Str, \"old\"))), (Should, TermQuery(Term(field=0, type=Str, \"school\"))), (Should, TermQuery(Term(field=0, type=Str, \"holy\"))), (Should, TermQuery(Term(field=0, type=Str, \"wood\"))), (Should, Boost(query=PhraseQuery { field: Field(0), phrase_terms: [(0, Term(field=0, type=Str, \"old\")), (1, Term(field=0, type=Str, \"school\")), (2, Term(field=0, type=Str, \"holy\")), (3, Term(field=0, type=Str, \"wood\"))], slop: 3 }, boost=2))] })");
+        assert_eq!(format!("{:?}", query), "Ok(BooleanQuery { subqueries: [(Should, TermQuery(Term(field=0, type=Str, \"old\"))), (Should, TermQuery(Term(field=0, type=Str, \"school\"))), (Should, TermQuery(Term(field=0, type=Str, \"holy\"))), (Should, TermQuery(Term(field=0, type=Str, \"wood\"))), (Should, Boost(query=PhraseQuery { field: Field(0), phrase_terms: [(0, Term(field=0, type=Str, \"old\")), (1, Term(field=0, type=Str, \"school\")), (2, Term(field=0, type=Str, \"holy\")), (3, Term(field=0, type=Str, \"wood\"))], slop: 3 }, boost=2))], minimum_number_should_match: 1 })");
         let query = query_parser.parse_query("old^2.0 school");
-        assert_eq!(format!("{:?}", query), "Ok(BooleanQuery { subqueries: [(Should, Boost(query=TermQuery(Term(field=0, type=Str, \"old\")), boost=2)), (Should, TermQuery(Term(field=0, type=Str, \"school\")))] })");
+        assert_eq!(format!("{:?}", query), "Ok(BooleanQuery { subqueries: [(Should, Boost(query=TermQuery(Term(field=0, type=Str, \"old\")), boost=2)), (Should, TermQuery(Term(field=0, type=Str, \"school\")))], minimum_number_should_match: 1 })");
         query_parser.query_parser_config.0.field_boosts = HashMap::from_iter(vec![("title".to_string(), 3.0)]);
         let query = query_parser.parse_query("old school");
-        assert_eq!(format!("{:?}", query), "Ok(BooleanQuery { subqueries: [(Should, Boost(query=TermQuery(Term(field=0, type=Str, \"old\")), boost=3)), (Should, Boost(query=TermQuery(Term(field=0, type=Str, \"school\")), boost=3)), (Should, Boost(query=PhraseQuery { field: Field(0), phrase_terms: [(0, Term(field=0, type=Str, \"old\")), (1, Term(field=0, type=Str, \"school\"))], slop: 3 }, boost=6))] })");
+        assert_eq!(format!("{:?}", query), "Ok(BooleanQuery { subqueries: [(Should, Boost(query=TermQuery(Term(field=0, type=Str, \"old\")), boost=3)), (Should, Boost(query=TermQuery(Term(field=0, type=Str, \"school\")), boost=3)), (Should, Boost(query=PhraseQuery { field: Field(0), phrase_terms: [(0, Term(field=0, type=Str, \"old\")), (1, Term(field=0, type=Str, \"school\"))], slop: 3 }, boost=6))], minimum_number_should_match: 1 })");
     }
 
     #[test]

@@ -5,10 +5,16 @@ use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
+use crate::components::{ConsumerManager, PreparedConsumption};
+use crate::errors::SummaServerResult;
+use crate::errors::ValidationError;
+use crate::utils::thread_handler::{ControlMessage, ThreadHandler};
 use async_broadcast::Receiver;
 use summa_core::components::{cleanup_index, IndexHolder, IndexRegistry};
 use summa_core::configs::ConfigProxy;
 use summa_core::configs::PartialProxy;
+use summa_core::directories::DefaultExternalRequestGenerator;
+use summa_core::external_request_impl::ExternalRequestImpl;
 use summa_core::proto_traits::Wrapper;
 use summa_core::utils::sync::{Handler, OwningHandler};
 use summa_core::validators;
@@ -18,11 +24,6 @@ use tantivy::store::ZstdCompressor;
 use tantivy::IndexBuilder;
 use tokio::sync::RwLock;
 use tracing::{debug, error, info, info_span, instrument, warn, Instrument};
-
-use crate::components::{ConsumerManager, PreparedConsumption};
-use crate::errors::SummaServerResult;
-use crate::errors::ValidationError;
-use crate::utils::thread_handler::{ControlMessage, ThreadHandler};
 
 /// `services::Index` is responsible for indices lifecycle. Here lives indices creation and deletion as well as committing and indexing new documents.
 #[derive(Clone)]
@@ -232,6 +233,23 @@ impl Index {
                 };
                 (index, index_engine_config)
             }
+            #[cfg(feature = "external-request")]
+            Some(proto::attach_index_request::IndexEngine::Remote(proto::AttachRemoteEngineRequest {
+                config: Some(remote_engine_config),
+            })) => {
+                let index = IndexHolder::open_remote_index::<ExternalRequestImpl, DefaultExternalRequestGenerator<ExternalRequestImpl>>(
+                    remote_engine_config.clone(),
+                    true,
+                )
+                .await?;
+                let index_engine_config = proto::IndexEngineConfig {
+                    config: Some(proto::index_engine_config::Config::Remote(remote_engine_config)),
+                    merge_policy: attach_index_request.merge_policy,
+                    query_parser_config: query_parser_config.clone(),
+                };
+                (index, index_engine_config)
+            }
+            _ => unimplemented!(),
         };
         let index_holder = self.insert_index(&attach_index_request.index_name, index, &index_engine_config).await?;
         index_holder
@@ -609,6 +627,9 @@ impl Index {
         let index = match index_engine_config.config {
             Some(proto::index_engine_config::Config::File(config)) => tantivy::Index::open_in_dir(config.path)?,
             Some(proto::index_engine_config::Config::Memory(config)) => IndexBuilder::new().schema(serde_yaml::from_str(&config.schema)?).create_in_ram()?,
+            Some(proto::index_engine_config::Config::Remote(config)) => {
+                IndexHolder::open_remote_index::<ExternalRequestImpl, DefaultExternalRequestGenerator<ExternalRequestImpl>>(config, true).await?
+            }
             _ => unimplemented!(),
         };
         Ok(index)

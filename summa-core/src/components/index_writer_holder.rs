@@ -1,13 +1,10 @@
 use std::collections::hash_map::RandomState;
-use std::collections::{BTreeMap, HashSet};
+use std::collections::HashSet;
 use std::path::Path;
 use std::sync::{Arc, RwLock};
 
-use chrono::{DateTime, Datelike};
-use rand::RngCore;
 use summa_proto::proto;
 use tantivy::index::SegmentId;
-use tantivy::json_utils::convert_to_fast_value_and_append_to_json_term;
 use tantivy::merge_policy::MergePolicy;
 use tantivy::query::Query;
 use tantivy::schema::document::ReferenceValue;
@@ -279,7 +276,7 @@ impl IndexWriterHolder {
     }
 
     /// Put document to the index. Before comes searchable it must be committed
-    pub fn index_document(&self, mut document: TantivyDocument, conflict_strategy: proto::ConflictStrategy) -> SummaResult<()> {
+    pub fn index_document(&self, document: TantivyDocument, conflict_strategy: proto::ConflictStrategy) -> SummaResult<()> {
         self.resolve_conflicts(&document, conflict_strategy)?;
         self.index_writer.add_document(document)?;
         Ok(())

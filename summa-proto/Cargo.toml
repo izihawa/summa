@@ -15,9 +15,6 @@ doc = true
 default = ["grpc"]
 grpc = ["tonic", "tonic-build", "tonic-reflection"]
 
-[dev-dependencies]
-tokio = { workspace = true }
-
 [build-dependencies]
 prost-build = { version = "0.12" }
 protoc-bin-vendored = "3.0.0"
@@ -25,7 +22,6 @@ tonic-build = { version = "0.10", default-features = false, features = ["prost",
 
 [dependencies]
 prost = "0.13"
-prost-types = "0.13"
 serde = { workspace = true }
 tonic = { workspace = true, features = ["gzip"], optional = true }
 tonic-build = { version = "0.12", default-features = false, features = ["prost", "transport"], optional = true }

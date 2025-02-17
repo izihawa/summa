@@ -23,7 +23,8 @@ pub mod components;
 pub mod configs;
 pub mod directories;
 pub mod errors;
-
+#[cfg(feature = "external-request")]
+pub mod external_request_impl;
 pub mod metrics;
 pub mod page_rank;
 pub mod proto_traits;

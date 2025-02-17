@@ -14,36 +14,28 @@ doc = true
 
 [features]
 fs = ["tantivy/mmap", "tokio/fs"]
+external-request = ["hyper", "hyper-tls", "openssl", "openssl-src", "openssl-sys"]
 metrics = ["opentelemetry"]
 tokio-rt = ["tokio/rt"]
-
-[dev-dependencies]
-matches = "0.1"
 
 [dependencies]
 aho-corasick = "1.0"
 anyhow = { workspace = true }
 async-trait = { workspace = true }
-base36 = "0.0.1"
 base64 = { workspace = true }
-bytes = { workspace = true }
-chrono = "0.4"
 config = { workspace = true }
 csv = "1.2"
 derive_builder = { workspace = true }
-downcast-rs = { workspace = true }
 fasteval2 = { workspace = true }
 futures = { workspace = true }
-http-body-util = { workspace = true }
-hyper = { workspace = true, optional = true }
-hyper-tls = { workspace = true, optional = true }
+hyper = { version = "0.14", optional = true, default-features = false, features = ["client", "http1"] }
+hyper-tls = { version = "^0.5", optional = true, default-features = false  }
+openssl = { workspace = true, features = ["vendored"], optional = true }
+openssl-src = { workspace = true, optional = true }
+openssl-sys = { workspace = true, optional = true }
 instant = { workspace = true }
 itertools = { workspace = true }
 izihawa_ttl_cache = "0.5"
-oneshot = { workspace = true }
-openssl = { workspace = true, optional = true }
-openssl-src = { workspace = true, optional = true }
-openssl-sys = { workspace = true, optional = true }
 opentelemetry = { version = "0.20", features = ["metrics", "rt-tokio"], optional = true }
 parking_lot = { workspace = true }
 pest = { workspace = true }
@@ -51,9 +43,7 @@ pest_derive = { workspace = true }
 pluralize-rs = "0.1"
 prost = { workspace = true }
 rand = { workspace = true }
-rayon = { workspace = true }
 regex = { workspace = true }
-rustc-hash = "1.1.0"
 serde = { workspace = true }
 serde_bytes = { workspace = true }
 serde_cbor = { workspace = true }

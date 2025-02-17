@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Protoc
-        uses: arduino/setup-protoc@v1
+        uses: arduino/setup-protoc@v3
       - uses: actions/cache@v2.1.6
         with:
           path: |

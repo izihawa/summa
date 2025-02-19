@@ -6,11 +6,11 @@ target = "wasm32-unknown-unknown"
 rustflags = [
     "-Ctarget-feature=+atomics,+bulk-memory,+mutable-globals,+simd128",
     "-Clink-arg=--initial-memory=67108864",
-    "-Clink-arg=--max-memory=4294967296"
+    "-Clink-arg=--max-memory=4294967296",
+    "--remap-path-prefix", "$HOME=~",
+    '--cfg=getrandom_backend="wasm_js"'
 ]
 
-[target.'cfg(target_family = "wasm")']
-rustflags = ['--cfg=getrandom_backend="wasm_js"']
 
 [profile.release]
 opt-level = 3

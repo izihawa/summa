@@ -430,7 +430,6 @@ impl IndexHolder {
         self.custom_search_async(index_alias, query, collectors, None, None, None).await
     }
 
-    #[cfg(feature = "tokio-rt")]
     /// Search `query` in the `IndexHolder` and collecting `Fruit` with a list of `collectors`
     pub async fn custom_search_async(
         &self,
@@ -450,10 +449,13 @@ impl IndexHolder {
         let store_cache = store_cache.unwrap_or(false);
 
         info!(action = "parse_query", index_name = ?self.index_name, query = ?query);
+        #[cfg(feature = "tokio-rt")]
         let parsed_query = {
             let query_parser = self.query_parser.clone();
             tokio::task::spawn_blocking(move || query_parser.parse_query(query)).await??
         };
+        #[cfg(not(feature = "tokio-rt"))]
+        let parsed_query = self.query_parser.parse_query(query)?;
 
         let caching_key = format!("{:?}|{:?}", parsed_query, is_fieldnorms_scoring_enabled);
 

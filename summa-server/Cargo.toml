@@ -1,7 +1,7 @@
 [package]
 edition = "2021"
 name = "summa-server"
-version = "0.25.0"
+version = "0.25.1"
 license-file = "LICENSE"
 description = "Fast full-text search server"
 homepage = "https://github.com/izihawa/summa"
@@ -27,7 +27,7 @@ metrics = ["opentelemetry", "opentelemetry-prometheus", "prometheus", "summa-cor
 maintenance = { status = "actively-developed" }
 
 [dev-dependencies]
-summa-core = { version = "0.25.0", path = "../summa-core", features = ["fs", "tokio-rt"] }
+summa-core = { version = "0.25.1", path = "../summa-core", features = ["fs", "tokio-rt"] }
 tempdir = "0.3.7"
 
 [dependencies]
@@ -52,7 +52,7 @@ rlimit = "0.10"
 serde = { workspace = true }
 serde_json = { workspace = true }
 serde_yaml = { workspace = true }
-summa-core = { version = "0.25.0", path = "../summa-core", features = ["fs", "tokio-rt"] }
+summa-core = { version = "0.25.1", path = "../summa-core", features = ["fs", "tokio-rt"] }
 summa-proto = { workspace = true, features = ["grpc"] }
 tantivy = { workspace = true }
 thiserror = { workspace = true }

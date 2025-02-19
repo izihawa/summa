@@ -298,6 +298,10 @@ export interface IndexAttributes {
      * @generated from protobuf field: repeated summa.proto.MappedField mapped_fields = 9;
      */
     mapped_fields: MappedField[];
+    /**
+     * @generated from protobuf field: optional string auto_id_field = 10;
+     */
+    auto_id_field?: string;
 }
 /**
  * Request for index creation
@@ -1677,7 +1681,8 @@ class IndexAttributes$Type extends MessageType<IndexAttributes> {
             { no: 4, name: "multi_fields", kind: "scalar", localName: "multi_fields", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ },
             { no: 6, name: "description", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
             { no: 8, name: "conflict_strategy", kind: "enum", localName: "conflict_strategy", T: () => ["summa.proto.ConflictStrategy", ConflictStrategy] },
-            { no: 9, name: "mapped_fields", kind: "message", localName: "mapped_fields", repeat: 1 /*RepeatType.PACKED*/, T: () => MappedField }
+            { no: 9, name: "mapped_fields", kind: "message", localName: "mapped_fields", repeat: 1 /*RepeatType.PACKED*/, T: () => MappedField },
+            { no: 10, name: "auto_id_field", kind: "scalar", localName: "auto_id_field", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<IndexAttributes>): IndexAttributes {
@@ -1710,6 +1715,9 @@ class IndexAttributes$Type extends MessageType<IndexAttributes> {
                 case /* repeated summa.proto.MappedField mapped_fields */ 9:
                     message.mapped_fields.push(MappedField.internalBinaryRead(reader, reader.uint32(), options));
                     break;
+                case /* optional string auto_id_field */ 10:
+                    message.auto_id_field = reader.string();
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -1740,6 +1748,9 @@ class IndexAttributes$Type extends MessageType<IndexAttributes> {
         /* repeated summa.proto.MappedField mapped_fields = 9; */
         for (let i = 0; i < message.mapped_fields.length; i++)
             MappedField.internalBinaryWrite(message.mapped_fields[i], writer.tag(9, WireType.LengthDelimited).fork(), options).join();
+        /* optional string auto_id_field = 10; */
+        if (message.auto_id_field !== undefined)
+            writer.tag(10, WireType.LengthDelimited).string(message.auto_id_field);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

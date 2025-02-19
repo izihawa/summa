@@ -41,6 +41,7 @@ futures-util = "0.3"
 http-body-util = { workspace = true }
 hyper = { workspace = true }
 hyper-util = { workspace = true }
+libz-sys = { workspace = true }
 opentelemetry = { version = "0.20", features = ["metrics", "rt-tokio"], optional = true }
 opentelemetry-prometheus = { version = "0.13", optional = true }
 path-absolutize = "3.0"
@@ -52,7 +53,7 @@ rlimit = "0.10"
 serde = { workspace = true }
 serde_json = { workspace = true }
 serde_yaml = { workspace = true }
-summa-core = { version = "0.25.1", path = "../summa-core", features = ["fs", "tokio-rt"] }
+summa-core = { version = "0.25.1", path = "../summa-core", features = ["external-request", "fs", "tokio-rt"] }
 summa-proto = { workspace = true, features = ["grpc"] }
 tantivy = { workspace = true }
 thiserror = { workspace = true }

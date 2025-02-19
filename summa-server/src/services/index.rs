@@ -232,7 +232,6 @@ impl Index {
                 };
                 (index, index_engine_config)
             }
-            #[cfg(feature = "external-request")]
             Some(proto::attach_index_request::IndexEngine::Remote(proto::AttachRemoteEngineRequest {
                 config: Some(remote_engine_config),
             })) => {
@@ -626,7 +625,6 @@ impl Index {
         let index = match index_engine_config.config {
             Some(proto::index_engine_config::Config::File(config)) => tantivy::Index::open_in_dir(config.path)?,
             Some(proto::index_engine_config::Config::Memory(config)) => IndexBuilder::new().schema(serde_yaml::from_str(&config.schema)?).create_in_ram()?,
-            #[cfg(feature = "external-request")]
             Some(proto::index_engine_config::Config::Remote(config)) => {
                 IndexHolder::open_remote_index::<
                     summa_core::external_request_impl::ExternalRequestImpl,

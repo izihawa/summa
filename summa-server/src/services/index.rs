@@ -14,7 +14,6 @@ use summa_core::components::{cleanup_index, IndexHolder, IndexRegistry};
 use summa_core::configs::ConfigProxy;
 use summa_core::configs::PartialProxy;
 use summa_core::directories::DefaultExternalRequestGenerator;
-use summa_core::external_request_impl::ExternalRequestImpl;
 use summa_core::proto_traits::Wrapper;
 use summa_core::utils::sync::{Handler, OwningHandler};
 use summa_core::validators;
@@ -237,10 +236,10 @@ impl Index {
             Some(proto::attach_index_request::IndexEngine::Remote(proto::AttachRemoteEngineRequest {
                 config: Some(remote_engine_config),
             })) => {
-                let index = IndexHolder::open_remote_index::<ExternalRequestImpl, DefaultExternalRequestGenerator<ExternalRequestImpl>>(
-                    remote_engine_config.clone(),
-                    true,
-                )
+                let index = IndexHolder::open_remote_index::<
+                    summa_core::external_request_impl::ExternalRequestImpl,
+                    DefaultExternalRequestGenerator<summa_core::external_request_impl::ExternalRequestImpl>,
+                >(remote_engine_config.clone(), true)
                 .await?;
                 let index_engine_config = proto::IndexEngineConfig {
                     config: Some(proto::index_engine_config::Config::Remote(remote_engine_config)),
@@ -627,8 +626,13 @@ impl Index {
         let index = match index_engine_config.config {
             Some(proto::index_engine_config::Config::File(config)) => tantivy::Index::open_in_dir(config.path)?,
             Some(proto::index_engine_config::Config::Memory(config)) => IndexBuilder::new().schema(serde_yaml::from_str(&config.schema)?).create_in_ram()?,
+            #[cfg(feature = "external-request")]
             Some(proto::index_engine_config::Config::Remote(config)) => {
-                IndexHolder::open_remote_index::<ExternalRequestImpl, DefaultExternalRequestGenerator<ExternalRequestImpl>>(config, true).await?
+                IndexHolder::open_remote_index::<
+                    summa_core::external_request_impl::ExternalRequestImpl,
+                    DefaultExternalRequestGenerator<summa_core::external_request_impl::ExternalRequestImpl>,
+                >(config, true)
+                .await?
             }
             _ => unimplemented!(),
         };

@@ -33,7 +33,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: summa-embed-py-macos-${{ matrix.python-version }}-${{ matrix.target }}-${{ matrix.package }}
           path: dist
 
   windows:
@@ -58,7 +58,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: summa-embed-py-windows-${{ matrix.python-version }}-${{ matrix.target }}-${{ matrix.package }}
           path: dist
 
   linux:
@@ -84,7 +84,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: summa-embed-py-linux-${{ matrix.python-version }}-${{ matrix.target }}-${{ matrix.package }}
           path: dist
 
   linux-cross:
@@ -109,7 +109,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: summa-embed-py-linux-cross-${{ matrix.python-version }}-${{ matrix.target }}-${{ matrix.package }}
           path: dist
 
   release:
@@ -118,9 +118,11 @@ jobs:
     needs: [ macos, windows, linux, linux-cross ]
     # needs: [ macos, linux, linux-cross ]
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
-          name: wheels
+          pattern: summa-embed-py-*
+          merge-multiple: true
+          path: dist
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"

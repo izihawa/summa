@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         package: ["summa-embed-py"]
-        python-version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
+        python-version: [ '3.10', '3.11', '3.12', '3.13' ]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v5
@@ -41,7 +41,7 @@ jobs:
     strategy:
       matrix:
         package: ["summa-embed-py"]
-        python-version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
+        python-version: [ '3.10', '3.11', '3.12', '3.13' ]
         target: [x64, x86]
     steps:
       - uses: actions/checkout@v3
@@ -66,7 +66,7 @@ jobs:
     strategy:
       matrix:
         package: ["summa-embed-py"]
-        python-version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
+        python-version: [ '3.10', '3.11', '3.12', '3.13' ]
         target: [ x64 ]
     steps:
       - uses: actions/checkout@v3
@@ -92,7 +92,7 @@ jobs:
     strategy:
       matrix:
         package: ["summa-embed-py"]
-        python-version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
+        python-version: [ '3.10', '3.11', '3.12', '3.13' ]
         target: [aarch64, armv7]
     steps:
       - uses: actions/checkout@v3
@@ -125,11 +125,11 @@ jobs:
           path: dist
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.13"
       - name: Publish to PyPI
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
         run: |
           pip3 install --upgrade twine
-          twine upload --skip-existing *
+          twine upload --skip-existing dist/*

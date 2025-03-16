@@ -14,7 +14,7 @@ use summa_proto::proto;
 use tokio_stream::wrappers::TcpListenerStream;
 use tonic::codec::CompressionEncoding;
 use tonic::transport::Server;
-use tracing::{info, info_span, instrument, Instrument};
+use tracing::{info, info_span, instrument, Instrument, Span};
 
 use crate::apis::consumer::ConsumerApiImpl;
 use crate::apis::index::IndexApiImpl;

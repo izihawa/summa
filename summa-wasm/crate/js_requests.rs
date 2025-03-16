@@ -7,9 +7,10 @@ use wasm_bindgen_futures::spawn_local;
 #[wasm_bindgen(raw_module = "../src/gate.ts")]
 extern "C" {
     #[wasm_bindgen(catch)]
-    pub fn request(method: String, url: String, headers: JsValue) -> Result<JsValue, JsValue>;
-    #[wasm_bindgen(catch)]
     pub async fn request_async(method: String, url: String, headers: JsValue) -> Result<JsValue, JsValue>;
+
+    #[wasm_bindgen(catch)]
+    pub async fn verified_request_async(method: String, url: String, headers: JsValue) -> Result<JsValue, JsValue>;
 }
 
 #[derive(Clone, Debug)]
@@ -34,24 +35,27 @@ impl ExternalRequest for JsExternalRequest {
     }
 
     fn request(self) -> Result<ExternalResponse, RequestError> {
-        let response = request(
-            self.method,
-            self.url,
-            serde_wasm_bindgen::to_value(&self.headers).map_err(|e| RequestError::External(e.to_string()))?,
-        )
-        .map_err(|error| RequestError::External(format!("{error:?}")))?;
-        let response = serde_wasm_bindgen::from_value(response).unwrap_throw();
-        Ok(response)
+        unimplemented!()
     }
 
     async fn request_async(self) -> Result<ExternalResponse, RequestError> {
         let (sender, mut receiver) = unbounded_channel();
         spawn_local(async move {
             let headers = serde_wasm_bindgen::to_value(&self.headers).expect("headers are not serializable");
-            let response = request_async(self.method, self.url, headers).await;
-            let response = response
-                .map(|response| serde_wasm_bindgen::from_value(response).unwrap_throw())
-                .map_err(|error| RequestError::External(format!("{error:?}")));
+            let response = if self.url.starts_with("ipns://") || self.url.starts_with("ipfs://") {
+                verified_request_async(self.method, self.url, headers).await
+            } else {
+                request_async(self.method, self.url, headers).await
+            };
+            let response = match response {
+                Ok(response) => {
+                    match serde_wasm_bindgen::from_value(response) {
+                        Ok(response) => Ok(response),
+                        Err(error) => Err(RequestError::External(format!("{error:?}"))),
+                    }
+                }
+                Err(error) => Err(RequestError::External(format!("{error:?}"))),
+            };
             sender.send(response).unwrap_throw();
         });
         let response = receiver.recv().await.unwrap_throw()?;

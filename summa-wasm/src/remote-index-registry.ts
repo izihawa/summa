@@ -7,14 +7,14 @@ export class RemoteIndexRegistry implements IIndexRegistry {
     init_guard: Promise<void>;
     index_registry: Comlink.Remote<IndexRegistry>;
 
-    constructor(worker_url: URL, wasm_url: URL, options: IndexRegistryOptions) {
+    constructor(worker_url: URL, wasm_url: URL, options: IndexRegistryOptions, gateways: string[]) {
         this.index_registry = Comlink.wrap<IndexRegistry>(
             new Worker(
                 worker_url,
                 { type: "module" }
             )
         );
-        this.init_guard = this.setup(wasm_url, options);
+        this.init_guard = this.setup(wasm_url, options, gateways);
     }
 
     add(index_name: string, index_engine_config: IndexEngineConfig): Promise<IndexAttributes> {
@@ -51,8 +51,10 @@ export class RemoteIndexRegistry implements IIndexRegistry {
 
     async setup(
         wasm_url: URL,
-        options: IndexRegistryOptions
+        options: IndexRegistryOptions,
+        gateways: string[]
     ) {
+        await this.index_registry.install_verified_fetch(gateways)
         return await this.index_registry.setup(
             wasm_url.href,
             options,

@@ -1,6 +1,7 @@
 import init, {setup_logging, WrappedIndexRegistry} from "../pkg";
 import {IndexAttributes, IndexEngineConfig} from "./grpc-web/index_service";
 import {SearchRequest} from "./grpc-web/query";
+import {install_verified_fetch} from "./gate";
 
 export interface IIndexRegistry {
   add(index_name: string, index_engine_config: IndexEngineConfig): Promise<IndexAttributes>;
@@ -76,5 +77,9 @@ export class IndexRegistry implements IIndexRegistry {
   }
   async get_index_field_names(index_name: string): Promise<string[]> {
     return await this.registry!.get_index_field_names(index_name);
+  }
+
+  install_verified_fetch(gateways: string[]): void {
+    return install_verified_fetch(gateways)
   }
 }

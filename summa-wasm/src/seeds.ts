@@ -12,18 +12,19 @@ export class LocalDatabaseSeed implements IIndexSeed {
     if (!ipfs_path.endsWith("/")) {
       ipfs_path += "/";
     }
-    if (!ipfs_path.startsWith("/")) {
-      ipfs_path = "/" + ipfs_path;
-    }
     this.ipfs_path = ipfs_path;
     this.cache_config = cache_config;
+  }
+
+  get_file_url(file_path: string) {
+    return this.ipfs_path + file_path
   }
 
   async retrieve_remote_engine_config(): Promise<RemoteEngineConfig> {
     return RemoteEngineConfig.create({
       method: "GET",
       url_template: `${this.ipfs_path}{file_name}`,
-      headers_template: { range: "bytes={start}-{end}", "cache-control": "no-store" },
+      headers_template: { "Range": "bytes={start}-{end}" },
       cache_config: this.cache_config,
     });
   }

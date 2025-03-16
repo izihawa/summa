@@ -3,88 +3,75 @@
 * synchronous calls are possible
 */
 
+import { blake3 as b3 } from '@noble/hashes/blake3'
+import { from } from 'multiformats/hashes/hasher'
+import {createVerifiedFetch, VerifiedFetch} from "@helia/verified-fetch";
+
+export const blake3 = from({
+    name: 'blake3',
+    code: 0x1e,
+    encode: (input) => b3(input),
+})
+
 type Header = {name: string, value: string};
 
-function parse_headers(xhr: XMLHttpRequest): Header[] {
-    const headers = xhr.getAllResponseHeaders().toLowerCase();
-    const arr = headers.trim().split(/[\r\n]+/);
-    const headers_arr: Header[] = [];
-    arr.forEach((line) => {
-      const parts = line.split(': ');
-      const name = parts.shift();
-      const value = parts.join(': ');
-      headers_arr.push({name: name!, value});
-    });
-    return headers_arr;
-}
-
-export function request(method: string, url: string, headers: {name: string, value: string}[]): { data: Uint8Array, headers: Header[]} | {status: number, status_text: string} {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = "arraybuffer";
-    xhr.withCredentials = true;
-    try {
-        xhr.open(method, url, false);
-        if (headers !== undefined) {
-            headers.forEach((header) => {
-              xhr.setRequestHeader(header.name, header.value)
-            });
-        }
-        xhr.send(null);
-    } catch (e) {
-        throw {
-            status: 500,
-            status_text: `${e}`,
-        }
-    }
-    if (xhr.status >= 200 && xhr.status < 300) {
-        return { data: new Uint8Array(xhr.response), headers: parse_headers(xhr) }
-    } else {
-        throw {
-            status: xhr.status,
-            status_text: xhr.statusText
-        };
-    }
+let verifiedFetch: VerifiedFetch | undefined = undefined;
+export function install_verified_fetch(gateways: string[]) {
+    createVerifiedFetch({
+        gateways: gateways,
+        hashers: [blake3]
+    }).then((customVerifiedFetch) => {
+        verifiedFetch = customVerifiedFetch;
+    })
 }
 
 
-export function request_async(method: string, url: string, headers: Array<{name: string, value: string}>) {
-    return new Promise(function (resolve, reject) {
-        let xhr = new XMLHttpRequest();
-        xhr.responseType = "arraybuffer";
-        xhr.withCredentials = true;
-        for (const header of headers)
-        if (header.name == "range") {
-            url += ("?r=" + header.value)
+function prepare_request_headers(url: string, headers_arr: Array<{name: string, value: string}>): [string, Headers] {
+    let headers = new Headers(Object.fromEntries(headers_arr.map((h): [string, string] => [h.name, h.value])));
+    if (headers.has("range")) {
+        const range_value = headers.get("range");
+        url += ("?r=" + range_value)
+        if (range_value !== "0-")
+        headers.set("cache-control", "no-store");
+    }
+    return [url, headers]
+}
+
+function parse_response_headers(headers: Headers): Header[] {
+    let headers_arr: Array<{name: string, value: string}> = []
+    headers.forEach((value, key) => {
+        headers_arr.push({name: key, value})
+    })
+    return headers_arr
+}
+
+
+export async function request_async(method: string, url: string, headers: Array<{name: string, value: string}>) {
+    const [processed_url, processed_headers] = prepare_request_headers(url, headers);
+    const response = await fetch(processed_url, {
+        method,
+        headers: processed_headers
+    })
+    if (response.status >= 200 && response.status < 300) {
+        return {
+            data: new Uint8Array(await response.arrayBuffer()),
+            headers: parse_response_headers(response.headers)
         }
-        try {
-            xhr.open(method, url);
-            if (headers !== undefined) {
-              headers.forEach((header) => {
-                xhr.setRequestHeader(header.name, header.value)
-              });
-            }
-            xhr.onload = function () {
-                if (this.status >= 200 && this.status < 300) {
-                    resolve({ data: new Uint8Array(xhr.response), headers: parse_headers(xhr) })
-                } else {
-                    reject({
-                        status: this.status,
-                        status_text: xhr.statusText
-                    });
-                }
-            };
-            xhr.onerror = function () {
-                reject({
-                    status: this.status,
-                    status_text: xhr.statusText
-                });
-            };
-            xhr.send();
-        } catch (e) {
-            reject({
-                status: 500,
-                status_text: `${e}`,
-            })
+    }
+    throw Error(response.statusText);
+}
+
+export async function verified_request_async(method: string, url: string, headers: Array<{name: string, value: string}>) {
+    const [processed_url, processed_headers] = prepare_request_headers(url, headers);
+    const response = await verifiedFetch!(processed_url, {
+        method,
+        headers: processed_headers
+    })
+    if (response.status >= 200 && response.status < 300) {
+        return {
+            data: new Uint8Array(await response.arrayBuffer()),
+            headers: parse_response_headers(response.headers)
         }
-    });
+    }
+    throw Error(response.statusText);
 }

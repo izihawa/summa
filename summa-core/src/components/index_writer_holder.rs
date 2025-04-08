@@ -296,6 +296,8 @@ impl IndexWriterHolder {
             .iter()
             .flat_map(|unique_field| {
                 document.get_all(*unique_field).map(|value| match value.as_value() {
+                    // ToDo: Support other types for arrays
+                    ReferenceValue::Array(iter) => Some(Ok(iter.map(|x| Term::from_field_text(*unique_field, x.as_str().unwrap())).collect())),
                     ReferenceValue::Leaf(ReferenceValueLeaf::Str(s)) => Some(Ok(vec![Term::from_field_text(*unique_field, s)])),
                     ReferenceValue::Leaf(ReferenceValueLeaf::I64(i)) => Some(Ok(vec![Term::from_field_i64(*unique_field, i)])),
                     ReferenceValue::Leaf(ReferenceValueLeaf::U64(i)) => Some(Ok(vec![Term::from_field_u64(*unique_field, i)])),

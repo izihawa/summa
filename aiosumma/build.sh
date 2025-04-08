@@ -1,6 +1,6 @@
  #!/usr/bin/env bash
 
-pip3 install -U build grpcio-tools twine
+pip3 install -U build grpcio-tools twine protobuf
 rm -rf aiosumma/proto/*
 touch aiosumma/proto/__init__.py
 python3 -m grpc_tools.protoc -I../summa-proto/proto --python_out=aiosumma/proto --pyi_out=aiosumma/proto --grpc_python_out=aiosumma/proto ../summa-proto/proto/*.proto

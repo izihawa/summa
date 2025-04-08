@@ -48,12 +48,10 @@ impl ExternalRequest for JsExternalRequest {
                 request_async(self.method, self.url, headers).await
             };
             let response = match response {
-                Ok(response) => {
-                    match serde_wasm_bindgen::from_value(response) {
-                        Ok(response) => Ok(response),
-                        Err(error) => Err(RequestError::External(format!("{error:?}"))),
-                    }
-                }
+                Ok(response) => match serde_wasm_bindgen::from_value(response) {
+                    Ok(response) => Ok(response),
+                    Err(error) => Err(RequestError::External(format!("{error:?}"))),
+                },
                 Err(error) => Err(RequestError::External(format!("{error:?}"))),
             };
             sender.send(response).unwrap_throw();

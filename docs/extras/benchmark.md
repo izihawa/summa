@@ -45,7 +45,7 @@ summa-cli localhost:8082 - create-index-from-file schema.yaml
 {% include import-data-to-summa-snippet.sh %}
 
 # Do a match query that returns top-10 documents and its total count
-summa-cli localhost:8082 search '[{"index_alias": "books", "query": {"match": {"value": "astronomy"}}, "collectors": [{"top_docs": {"limit": 10}}, {"count": {}}]}]'
+summa-cli localhost:8082 search '{"index_alias": "books", "query": {"match": {"value": "astronomy"}}, "collectors": [{"top_docs": {"limit": 10}}, {"count": {}}]}'
 ```
 
 ## Benchmarking

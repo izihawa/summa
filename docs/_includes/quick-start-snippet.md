@@ -93,7 +93,7 @@ Let's do a test query:
 
 ```bash
 # Do a match query that returns top-10 documents and its total count
-summa-cli 0.0.0.0:8082 search '[{"index_alias": "books", "query": {"match": {"value": "astronomy"}}, "collectors": [{"top_docs": {"limit": 10}}, {"count": {}}]}]'
+summa-cli 0.0.0.0:8082 search '{"index_alias": "books", "query": {"match": {"value": "astronomy"}}, "collectors": [{"top_docs": {"limit": 10}}, {"count": {}}]}'
 ```
 
 You will see response containing found documents.

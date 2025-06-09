@@ -697,18 +697,25 @@ impl IndexHolder {
     }
 
     /// Index multiple documents at a time
-    pub async fn index_bulk(&self, documents: &Vec<Vec<u8>>, conflict_strategy: Option<proto::ConflictStrategy>) -> SummaResult<(u64, u64)> {
+    pub async fn index_bulk(
+        &self,
+        documents: &Vec<Vec<u8>>,
+        conflict_strategy: Option<proto::ConflictStrategy>,
+        skip_updated_at_modification: bool,
+    ) -> SummaResult<(u64, u64)> {
         let (mut success_docs, mut failed_docs) = (0u64, 0u64);
         debug!(action = "acquiring_index_writer_for_read");
         let index_writer_holder = self.index_writer_holder()?.read().await;
         let conflict_strategy = conflict_strategy.unwrap_or_else(|| self.conflict_strategy());
         for document in documents {
-            match SummaDocument::UnboundJsonBytes(document)
-                .bound_with(&self.index.schema())
-                .try_into()
-                .and_then(|document| index_writer_holder.index_document(document, conflict_strategy))
-            {
-                Ok(_) => success_docs += 1,
+            match SummaDocument::parse_json_bytes(&self.index.schema(), document, skip_updated_at_modification) {
+                Ok(document) => match index_writer_holder.index_document(document, conflict_strategy) {
+                    Ok(_) => success_docs += 1,
+                    Err(error) => {
+                        warn!(action = "error", error = ?error);
+                        failed_docs += 1
+                    }
+                },
                 Err(error) => {
                     warn!(action = "error", error = ?error);
                     failed_docs += 1

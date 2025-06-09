@@ -200,7 +200,11 @@ impl proto::index_api_server::IndexApi for IndexApiImpl {
                     let now = Instant::now();
                     let index_holder = self.index_service.get_index_holder(&chunk.index_name).await?;
                     let (success_bulk_docs, failed_bulk_docs) = index_holder
-                        .index_bulk(&chunk.documents, chunk.conflict_strategy.and_then(proto::ConflictStrategy::from_i32))
+                        .index_bulk(
+                            &chunk.documents,
+                            chunk.conflict_strategy.and_then(proto::ConflictStrategy::from_i32),
+                            chunk.skip_updated_at_modification,
+                        )
                         .await
                         .map_err(crate::errors::Error::from)?;
                     elapsed_secs += now.elapsed().as_secs_f64();

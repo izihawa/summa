@@ -14,3 +14,4 @@ Articles about search engines, their algorithms, and running search closer to th
 - [Dense Retrieval](dense-retrieval.md): from embeddings to candidate selection and exact scoring.
 - [Sparse Retrieval](sparse-retrieval.md): from lexical scoring to learned expansion and approximate search.
 - [Summa vs Lucene on the Search Benchmark Game](summa-vs-lucene.md): faster on three of four official commands, where Lucene still wins, and how to reproduce it.
+- [Summa vs Lucene at 32 clients](summa-vs-lucene-32-clients.md): 1.65× higher throughput on Searchbench, with Luxir, Elasticsearch and OpenSearch on the same host.

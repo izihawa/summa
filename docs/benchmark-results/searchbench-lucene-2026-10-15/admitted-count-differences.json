@@ -1,0 +1,298 @@
+[
+ {
+  "class": "high_term",
+  "query": "s",
+  "summa": 1581237,
+  "lucene": 1581242,
+  "elasticsearch": 1581242,
+  "luxir": 1581242
+ },
+ {
+  "class": "and_high_high",
+  "query": "+of +s",
+  "summa": 1447589,
+  "lucene": 1447594,
+  "elasticsearch": 1447594,
+  "luxir": 1447594
+ },
+ {
+  "class": "or_high_med",
+  "query": "s 1986",
+  "summa": 1722098,
+  "lucene": 1722103,
+  "elasticsearch": 1722103,
+  "luxir": 1722103
+ },
+ {
+  "class": "or_high_med",
+  "query": "s yet",
+  "summa": 1665552,
+  "lucene": 1665557,
+  "elasticsearch": 1665557,
+  "luxir": 1665557
+ },
+ {
+  "class": "high_phrase",
+  "query": "\"of the\"",
+  "summa": 4957258,
+  "lucene": 4957259,
+  "elasticsearch": 4957259,
+  "luxir": 4957259
+ },
+ {
+  "class": "high_phrase",
+  "query": "\"to the\"",
+  "summa": 2070389,
+  "lucene": 2070391,
+  "elasticsearch": 2070391,
+  "luxir": 2070391
+ },
+ {
+  "class": "high_phrase",
+  "query": "\"on the\"",
+  "summa": 1668239,
+  "lucene": 1668240,
+  "elasticsearch": 1668240,
+  "luxir": 1668240
+ },
+ {
+  "class": "high_phrase",
+  "query": "\"and the\"",
+  "summa": 1662333,
+  "lucene": 1662335,
+  "elasticsearch": 1662335,
+  "luxir": 1662335
+ },
+ {
+  "class": "high_phrase",
+  "query": "\"at the\"",
+  "summa": 1206751,
+  "lucene": 1206753,
+  "elasticsearch": 1206753,
+  "luxir": 1206753
+ },
+ {
+  "class": "high_phrase",
+  "query": "\"is a\"",
+  "summa": 1092535,
+  "lucene": 1092537,
+  "elasticsearch": 1092537,
+  "luxir": 1092537
+ },
+ {
+  "class": "high_phrase",
+  "query": "\"in a\"",
+  "summa": 826776,
+  "lucene": 826777,
+  "elasticsearch": 826777,
+  "luxir": 826777
+ },
+ {
+  "class": "high_phrase",
+  "query": "\"ref http\"",
+  "summa": 802121,
+  "lucene": 802122,
+  "elasticsearch": 802122,
+  "luxir": 802122
+ },
+ {
+  "class": "high_phrase",
+  "query": "\"was a\"",
+  "summa": 497938,
+  "lucene": 497940,
+  "elasticsearch": 497940,
+  "luxir": 497940
+ },
+ {
+  "class": "med_phrase",
+  "query": "\"to a\"",
+  "summa": 426582,
+  "lucene": 426583,
+  "elasticsearch": 426583,
+  "luxir": 426583
+ },
+ {
+  "class": "low_phrase",
+  "query": "\"that of\"",
+  "summa": 72539,
+  "lucene": 72544,
+  "elasticsearch": 72544,
+  "luxir": 72544
+ },
+ {
+  "class": "high_sloppy_phrase",
+  "query": "\"he was\"~4",
+  "summa": 575165,
+  "lucene": 575166,
+  "elasticsearch": 575166,
+  "luxir": 575166
+ },
+ {
+  "class": "med_sloppy_phrase",
+  "query": "\"during the\"~4",
+  "summa": 560112,
+  "lucene": 560115,
+  "elasticsearch": 560115,
+  "luxir": 560115
+ },
+ {
+  "class": "med_sloppy_phrase",
+  "query": "\"the same\"~4",
+  "summa": 388654,
+  "lucene": 388655,
+  "elasticsearch": 388655,
+  "luxir": 388655
+ },
+ {
+  "class": "med_sloppy_phrase",
+  "query": "\"links http\"~4",
+  "summa": 431011,
+  "lucene": 431013,
+  "elasticsearch": 431013,
+  "luxir": 431013
+ },
+ {
+  "class": "med_sloppy_phrase",
+  "query": "\"is an\"~4",
+  "summa": 572346,
+  "lucene": 572355,
+  "elasticsearch": 572355,
+  "luxir": 572355
+ },
+ {
+  "class": "med_sloppy_phrase",
+  "query": "\"place of\"~4",
+  "summa": 350038,
+  "lucene": 350039,
+  "elasticsearch": 350039,
+  "luxir": 350039
+ },
+ {
+  "class": "med_sloppy_phrase",
+  "query": "\"number of\"~4",
+  "summa": 318048,
+  "lucene": 318049,
+  "elasticsearch": 318049,
+  "luxir": 318049
+ },
+ {
+  "class": "med_sloppy_phrase",
+  "query": "\"the most\"~4",
+  "summa": 525131,
+  "lucene": 525132,
+  "elasticsearch": 525132,
+  "luxir": 525132
+ },
+ {
+  "class": "med_sloppy_phrase",
+  "query": "\"under the\"~4",
+  "summa": 384223,
+  "lucene": 384225,
+  "elasticsearch": 384225,
+  "luxir": 384225
+ },
+ {
+  "class": "med_sloppy_phrase",
+  "query": "\"this is\"~4",
+  "summa": 610206,
+  "lucene": 610212,
+  "elasticsearch": 610212,
+  "luxir": 610212
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"the story\"~4",
+  "summa": 141899,
+  "lucene": 141901,
+  "elasticsearch": 141901,
+  "luxir": 141901
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"the number\"~4",
+  "summa": 187343,
+  "lucene": 187344,
+  "elasticsearch": 187344,
+  "luxir": 187344
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"much of\"~4",
+  "summa": 109977,
+  "lucene": 109980,
+  "elasticsearch": 109980,
+  "luxir": 109980
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"the three\"~4",
+  "summa": 256157,
+  "lucene": 256159,
+  "elasticsearch": 256159,
+  "luxir": 256159
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"up the\"~4",
+  "summa": 320829,
+  "lucene": 320837,
+  "elasticsearch": 320837,
+  "luxir": 320837
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"that of\"~4",
+  "summa": 773008,
+  "lucene": 773022,
+  "elasticsearch": 773022,
+  "luxir": 773022
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"addition to\"~4",
+  "summa": 79563,
+  "lucene": 79564,
+  "elasticsearch": 79564,
+  "luxir": 79564
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"and also\"~4",
+  "summa": 347367,
+  "lucene": 347374,
+  "elasticsearch": 347374,
+  "luxir": 347374
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"the way\"~4",
+  "summa": 180383,
+  "lucene": 180384,
+  "elasticsearch": 180384,
+  "luxir": 180384
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"time of\"~4",
+  "summa": 264329,
+  "lucene": 264330,
+  "elasticsearch": 264330,
+  "luxir": 264330
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"and later\"~4",
+  "summa": 158043,
+  "lucene": 158047,
+  "elasticsearch": 158047,
+  "luxir": 158047
+ },
+ {
+  "class": "low_sloppy_phrase",
+  "query": "\"the western\"~4",
+  "summa": 125157,
+  "lucene": 125158,
+  "elasticsearch": 125158,
+  "luxir": 125158
+ }
+]

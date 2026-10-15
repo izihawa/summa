@@ -1,0 +1,150 @@
+++ date -u
++ echo 'date: Thu Oct 15 08:48:26 UTC 2026'
+date: Thu Oct 15 08:48:26 UTC 2026
+++ git -C /mnt/sb/summa rev-parse HEAD
+++ git -C /mnt/sb/summa log -1 --format=%s
++ echo 'summa: d572ddb1addbf4f5ea10e24d88fefd0b5adad8eb searchbench: raw Lucene 10.5.1 adapter for the throughput campaign'
+summa: d572ddb1addbf4f5ea10e24d88fefd0b5adad8eb searchbench: raw Lucene 10.5.1 adapter for the throughput campaign
+++ git -C /mnt/sb/summa rev-parse origin/main
++ echo 'summa base (origin/main): d7d910e70617246dea2f4169ccbb7e8d93cc3855'
+summa base (origin/main): d7d910e70617246dea2f4169ccbb7e8d93cc3855
+++ git -C /mnt/sb/searchbench rev-parse HEAD
+++ git -C /mnt/sb/searchbench describe --tags
++ echo 'searchbench: 81f67380ef2d1528b40b6770f5ea5d6b105bc88e fulltext-munin-host-20260920'
+searchbench: 81f67380ef2d1528b40b6770f5ea5d6b105bc88e fulltext-munin-host-20260920
+++ RUSTUP_HOME=/mnt/sb/rustup
+++ /mnt/sb/cargo/bin/rustc +1.98.1 --version
++ echo 'rustc: rustc 1.98.1 (48a229cea 2026-09-01)'
+rustc: rustc 1.98.1 (48a229cea 2026-09-01)
+++ /mnt/sb/searchbench/engines/elasticsearch-9.5.4/jdk/bin/java -version
+++ tr '\n' ' '
++ echo 'java (lucene + es bundled): openjdk version "26.0.2" 2026-07-21 OpenJDK Runtime Environment (build 26.0.2+10-55) OpenJDK 64-Bit Server VM (build 26.0.2+10-55, mixed mode, sharing) '
+java (lucene + es bundled): openjdk version "26.0.2" 2026-07-21 OpenJDK Runtime Environment (build 26.0.2+10-55) OpenJDK 64-Bit Server VM (build 26.0.2+10-55, mixed mode, sharing) 
+++ /mnt/sb/searchbench/engines/opensearch-3.8.0/jdk/bin/java -version
+++ tr '\n' ' '
++ echo 'java (os bundled): openjdk version "25.0.4" 2026-07-21 LTS OpenJDK Runtime Environment Temurin-25.0.4+7 (build 25.0.4+7-LTS) OpenJDK 64-Bit Server VM Temurin-25.0.4+7 (build 25.0.4+7-LTS, mixed mode, sharing) '
+java (os bundled): openjdk version "25.0.4" 2026-07-21 LTS OpenJDK Runtime Environment Temurin-25.0.4+7 (build 25.0.4+7-LTS) OpenJDK 64-Bit Server VM Temurin-25.0.4+7 (build 25.0.4+7-LTS, mixed mode, sharing) 
++ echo 'lucene jars:'
+lucene jars:
++ sha256sum /mnt/sb/summa/scripts/searchbench/lucene/lib/lucene-core-10.5.1.jar /mnt/sb/summa/scripts/searchbench/lucene/lib/lucene-misc-10.5.1.jar /mnt/sb/summa/scripts/searchbench/lucene/lib/lucene-queryparser-10.5.1.jar /mnt/sb/summa/scripts/searchbench/lucene/build/searchbench-lucene.jar
+2b4912cc792f462e8e7b350f7c958f538ee7ec42da4cf4b65902fb9d546bba53  /mnt/sb/summa/scripts/searchbench/lucene/lib/lucene-core-10.5.1.jar
+75065a4afbd5bb3bc9230d9ee772368c769cdf4e1a4c33071bd9b0832c00c0ae  /mnt/sb/summa/scripts/searchbench/lucene/lib/lucene-misc-10.5.1.jar
+75eddb74abccaf1f3ea5cb1ca2ceff29afb7f564892b50914404720f03d458c4  /mnt/sb/summa/scripts/searchbench/lucene/lib/lucene-queryparser-10.5.1.jar
+f54fa0ec455aa1f80ba28944a39b7a29ac5a6db7ceac1db8e27745d387bc2975  /mnt/sb/summa/scripts/searchbench/lucene/build/searchbench-lucene.jar
++ echo binaries:
+binaries:
++ sha256sum /mnt/sb/bin/searchbench_http /mnt/sb/luxir-release/luxir-0.1.0-linux-x86_64-v4 /mnt/sb/searchbench/driver/build/bench_replay
+27916ad879855035f3a2e09955693e151ba3667967ec0f91ce7550eeffdf60bc  /mnt/sb/bin/searchbench_http
+d848ed884ff43788e8a05596006622c907912c8905f8314f59b08322b4150b89  /mnt/sb/luxir-release/luxir-0.1.0-linux-x86_64-v4
+7791b32f2b4a8108a8ba18e8cc710fc124b601ef19318e562e4e2193315c5b69  /mnt/sb/searchbench/driver/build/bench_replay
++ echo 'luxir SHA256SUMS:'
+luxir SHA256SUMS:
++ cat /mnt/sb/luxir-release/SHA256SUMS
+9c674fc9ede3a471ee5cae0603c3642d58caf4b9e72405c3dc544cb2da662f68  luxir-0.1.0-linux-x86_64-v2
+2a939c5eb86ee150e5bdf8ceadd017826648de6e3e7354be0beb15c8fdbc4a01  luxir-0.1.0-linux-x86_64-v2-asan.tar.gz
+a2cb87079b6897824237ec7e953bba2e1668fe815946fa6967cf5ff739ae320b  luxir-0.1.0-linux-x86_64-v2-debug.tar.gz
+71962070e195916bc2b122db40a80954737d7571316a6649d4fdaeae24286cf1  luxir-0.1.0-linux-x86_64-v2-symbols.tar.gz
+26d010e83489d4d735ad4a44c110bb86f560c9534e01bf2ba32f53b5e0fd6327  luxir-0.1.0-linux-x86_64-v2.tar.gz
+5bcfe74159b5abba9bbafffeb6a224483cc8f8f37ad85d76568627555b3a434f  luxir-0.1.0-linux-x86_64-v3
+9a64c976f8793dee4a05bf5d4c8519e4b109921c5378683cf5364c13b9102932  luxir-0.1.0-linux-x86_64-v3-symbols.tar.gz
+ac8e29f787e693370e5641318b0f78a0a4f5537923524ecbf56b582517000fec  luxir-0.1.0-linux-x86_64-v3.tar.gz
+d848ed884ff43788e8a05596006622c907912c8905f8314f59b08322b4150b89  luxir-0.1.0-linux-x86_64-v4
+b5dc7d16c0f441cbf9f428ec616c037b48e2e5ea6f6f7bdd6ef3efd36ceaebb2  luxir-0.1.0-linux-x86_64-v4-symbols.tar.gz
+276dec9bf4ddf2eb6dd511577aed2c58c5c13b00c1e5f801d58c1fc85995db8c  luxir-0.1.0-linux-x86_64-v4.tar.gz
+++ cat /mnt/sb/searchbench/corpus/corpus-10m-searchbench.ndjson.sha256
++ echo 'corpus sha256 sidecar: b15e60ad32a0e9f09f3be5335db86ccd885e1be1418086a906d68529e6ec1c9d'
+corpus sha256 sidecar: b15e60ad32a0e9f09f3be5335db86ccd885e1be1418086a906d68529e6ec1c9d
++ echo 'es/os/luxir identity:'
+es/os/luxir identity:
++ cat /mnt/sb/searchbench/data/elasticsearch/10m-searchbench-merged.identity /mnt/sb/searchbench/data/luxir/10m-searchbench-merged.identity /mnt/sb/searchbench/data/opensearch/10m-searchbench-merged.identity
+b15e60ad32a0e9f09f3be5335db86ccd885e1be1418086a906d68529e6ec1c9d 3
+b15e60ad32a0e9f09f3be5335db86ccd885e1be1418086a906d68529e6ec1c9d 4
+b15e60ad32a0e9f09f3be5335db86ccd885e1be1418086a906d68529e6ec1c9d 3
+++ uname -a
++ echo 'kernel: Linux benchmark-host (GCP n2-highmem-32, us-east1-b) 7.0.0-1013-gcp #13~24.04.1-Ubuntu SMP PREEMPT Tue Sep 15 18:10:25 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux'
+kernel: Linux benchmark-host (GCP n2-highmem-32, us-east1-b) 7.0.0-1013-gcp #13~24.04.1-Ubuntu SMP PREEMPT Tue Sep 15 18:10:25 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
++ lscpu
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           46 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  32
+On-line CPU(s) list:                     0-31
+Vendor ID:                               GenuineIntel
+Model name:                              Intel(R) Xeon(R) CPU @ 2.80GHz
+CPU family:                              6
+Model:                                   85
+Thread(s) per core:                      2
+Core(s) per socket:                      8
+Socket(s):                               2
+Stepping:                                7
+BogoMIPS:                                5599.99
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves arat avx512_vnni md_clear arch_capabilities
+Hypervisor vendor:                       KVM
+Virtualization type:                     full
+L1d cache:                               512 KiB (16 instances)
+L1i cache:                               512 KiB (16 instances)
+L2 cache:                                16 MiB (16 instances)
+L3 cache:                                66 MiB (2 instances)
+NUMA node(s):                            2
+NUMA node0 CPU(s):                       0-7,16-23
+NUMA node1 CPU(s):                       8-15,24-31
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Ghostwrite:                Not affected
+Vulnerability Indirect target selection: Mitigation; Aligned branch/return thunks
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Vulnerable: Clear CPU buffers attempted, no microcode; SMT Host state unknown
+Vulnerability Old microcode:             Not affected
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Mitigation; Enhanced IBRS
+Vulnerability Spec rstack overflow:      Not affected
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop
+Vulnerability Srbds:                     Not affected
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Vulnerable: Clear CPU buffers attempted, no microcode; SMT Host state unknown
+Vulnerability Vmscape:                   Not affected
++ free -g
+               total        used        free      shared  buff/cache   available
+Mem:             251           3         148           0         101         248
+Swap:              0           0           0
++ echo 'es jvm options:'
+es jvm options:
++ cat /mnt/sb/searchbench/config/elasticsearch/searchbench.options
+-Xms8g
+-Xmx8g
++ echo 'lucene run.sh:'
+lucene run.sh:
++ cat /mnt/sb/summa/scripts/searchbench/lucene/run.sh
+#!/usr/bin/env bash
+# Run the adapter with the campaign JVM posture. Arguments go to searchbench.lucene.Main:
+#   run.sh index INDEX CORPUS.jsonl --threads 30 [--bp]
+#   run.sh serve INDEX PORT --workers 30
+# LUCENE_HEAP (default 8g) matches Searchbench's fixed Elasticsearch/OpenSearch heap.
+# LUCENE_JAVA_OPTS appends JVM flags; record any override with the results.
+set -euo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+lib=${LUCENE_LIB:-$here/lib}
+build=${LUCENE_BUILD:-$here/build}
+: "${JAVA_HOME:?set JAVA_HOME to a JDK 21 or newer}"
+heap=${LUCENE_HEAP:-8g}
+# shellcheck disable=SC2086
+exec "$JAVA_HOME/bin/java" \
+  "-Xms$heap" "-Xmx$heap" -XX:+UseG1GC -XX:+AlwaysPreTouch \
+  --add-modules jdk.incubator.vector --enable-native-access=ALL-UNNAMED \
+  ${LUCENE_JAVA_OPTS:-} \
+  -cp "$build/searchbench-lucene.jar:$lib/*" searchbench.lucene.Main "$@"
++ echo 'index sizes:'
+index sizes:
++ du -sb /mnt/sb/indexes/lucene-bp /mnt/sb/indexes/lucene-plain /mnt/sb/indexes/summa-default /mnt/sb/indexes/summa-rgb /mnt/sb/searchbench/data/elasticsearch/10m-searchbench-merged /mnt/sb/searchbench/data/luxir/10m-searchbench-merged /mnt/sb/searchbench/data/opensearch/10m-searchbench-merged
+2915562964	/mnt/sb/indexes/lucene-bp
+3059592884	/mnt/sb/indexes/lucene-plain
+18710990175	/mnt/sb/indexes/summa-default
+14004155540	/mnt/sb/indexes/summa-rgb
+11543318568	/mnt/sb/searchbench/data/elasticsearch/10m-searchbench-merged
+9592555365	/mnt/sb/searchbench/data/luxir/10m-searchbench-merged
+11572712374	/mnt/sb/searchbench/data/opensearch/10m-searchbench-merged

@@ -81,6 +81,25 @@ class AgreementGateTests(unittest.TestCase):
                 json.loads((out / "agreement.json").read_text())[0]["include"]
             )
 
+    def test_gate_compares_only_the_requested_engines(self):
+        item = Item("high_term", "file")
+        with tempfile.TemporaryDirectory() as temporary:
+            out = Path(temporary)
+            for engine in ("summa", "lucene"):
+                (out / f"{engine}-counts.json").write_text(
+                    json.dumps([{"key": campaign.key(item), "count": 100}])
+                )
+            args = SimpleNamespace(out=out, engines=["summa", "lucene"])
+            campaign.gate(args, [item])
+            result = json.loads((out / "agreement.json").read_text())
+            self.assertTrue(result[0]["include"])
+            self.assertEqual(sorted(result[0]["observed"]), ["lucene", "summa"])
+            self.assertEqual(
+                campaign.eligible_counts(result, "lucene"), {campaign.key(item): 100}
+            )
+            with self.assertRaises(FileNotFoundError):
+                campaign.gate(SimpleNamespace(out=out), [item])
+
 
 if __name__ == "__main__":
     unittest.main()

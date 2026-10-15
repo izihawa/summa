@@ -844,3 +844,16 @@ analyzer build. The latest full-corpus probe succeeds on 677/826 queries, with
 remain visible resource-limit errors. Its 673-query timing matrix and four
 separately timed newly admitted regex queries must not be combined into a
 single throughput number. Final-source corpus retiming is still pending.
+
+## Raw Lucene reference
+
+[`scripts/searchbench/lucene/`](../scripts/searchbench/lucene/README.md) is a
+benchmark-only Lucene 10.5.1 server. It speaks this example's `/search`/`/stats`
+wire shape, so `campaign.py --engine lucene` reuses the Summa adapter.
+
+- **Indexing.** It indexes with Elasticsearch's `standard` analyzer chain and
+  BM25(1.2, 0.75). It offers an optional `BPIndexReorderer` build for comparison
+  with RGB.
+- **Gating.** `gate --engines ... lucene` adds it to a gate. Its counts must equal
+  Elasticsearch's before any timing run.
+- **Posture.** The README records the posture and the fairness notes.

@@ -19,7 +19,11 @@ from dataclasses import asdict
 from pathlib import Path
 from types import SimpleNamespace
 
-ENGINES = ("summa", "elasticsearch", "opensearch", "luxir")
+ENGINES = ("summa", "elasticsearch", "opensearch", "luxir", "lucene")
+# Engines gated together unless --engines narrows or extends the set.
+DEFAULT_GATE_ENGINES = ("summa", "elasticsearch", "opensearch", "luxir")
+# Engines served by a Summa-shaped benchmark HTTP frontend (POST /search, GET /stats).
+SUMMA_WIRE_ENGINES = ("summa", "lucene")
 
 
 def write(path, value):
@@ -102,16 +106,17 @@ async def probe(args, adapter, items):
 
 def gate(args, items):
     comparison = getattr(args, "comparison", "exact-count")
+    engines = getattr(args, "engines", None) or DEFAULT_GATE_ENGINES
     counts = {
         engine: {
             row["key"]: row
             for row in json.loads((args.out / f"{engine}-counts.json").read_text())
         }
-        for engine in ENGINES
+        for engine in engines
     }
     rows = []
     for item in items:
-        observed = {engine: counts[engine][key(item)] for engine in ENGINES}
+        observed = {engine: counts[engine][key(item)] for engine in engines}
         values = [row.get("count") for row in observed.values()]
         successful = all(type(value) is int for value in values)
         same = successful and len(set(values)) == 1
@@ -153,7 +158,7 @@ def topology(args, adapter):
     from adapters import Request
     from topology_probe import assert_quiescent_topology, index_topology
 
-    if args.engine != "summa":
+    if args.engine not in SUMMA_WIRE_ENGINES:
         result = index_topology(adapter, args.host, args.port, args.timeout)
         assert_quiescent_topology(result, 1)
         if result["live_docs"] != args.documents:
@@ -171,7 +176,7 @@ def topology(args, adapter):
 
     result = asyncio.run(fetch())
     if result["documents"] != args.documents or len(result["segments"]) != 1:
-        raise RuntimeError(f"wrong Summa topology: {result}")
+        raise RuntimeError(f"wrong {args.engine} topology: {result}")
     return result
 
 
@@ -418,6 +423,13 @@ def main():
     parser.add_argument("--repetitions", type=int, default=3)
     parser.add_argument("--session-warmup", type=float, default=30)
     parser.add_argument(
+        "--engines",
+        nargs="+",
+        choices=ENGINES,
+        default=list(DEFAULT_GATE_ENGINES),
+        help="engines whose probe counts the gate compares",
+    )
+    parser.add_argument(
         "--families", nargs="+", help="measure only these eligible families"
     )
     parser.add_argument("--clients", nargs="+", type=int, default=[1, 8, 32])
@@ -436,7 +448,7 @@ def main():
         return
     adapter = (
         install_adapter()
-        if args.engine == "summa"
+        if args.engine in SUMMA_WIRE_ENGINES
         else make_adapter(args.engine, "searchbench")
     )
     topology(args, adapter)

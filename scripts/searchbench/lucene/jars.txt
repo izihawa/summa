@@ -1,0 +1,6 @@
+# Pinned runtime classpath: SHA-256 and Maven Central path. Lucene 10.5.1 is the
+# Lucene version bundled by Elasticsearch 9.5.4 in the pinned Searchbench tag.
+# Checksums were verified against Maven Central's .sha1 and .sha512 sidecars.
+2b4912cc792f462e8e7b350f7c958f538ee7ec42da4cf4b65902fb9d546bba53 org/apache/lucene/lucene-core/10.5.1/lucene-core-10.5.1.jar
+75eddb74abccaf1f3ea5cb1ca2ceff29afb7f564892b50914404720f03d458c4 org/apache/lucene/lucene-queryparser/10.5.1/lucene-queryparser-10.5.1.jar
+75065a4afbd5bb3bc9230d9ee772368c769cdf4e1a4c33071bd9b0832c00c0ae org/apache/lucene/lucene-misc/10.5.1/lucene-misc-10.5.1.jar

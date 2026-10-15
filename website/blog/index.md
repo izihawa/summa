@@ -13,3 +13,4 @@ Articles about search engines, their algorithms, and running search closer to th
 - [Mitigating Internet Censorship and Privacy Issues](mitigating-internet-censorship-and-privacy-issues.md): the original browser-search idea, with current notes on its limitations.
 - [Dense Retrieval](dense-retrieval.md): from embeddings to candidate selection and exact scoring.
 - [Sparse Retrieval](sparse-retrieval.md): from lexical scoring to learned expansion and approximate search.
+- [Summa vs Lucene on the Search Benchmark Game](summa-vs-lucene.md): faster on three of four official commands, where Lucene still wins, and how to reproduce it.

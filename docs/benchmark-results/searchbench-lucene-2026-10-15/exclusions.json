@@ -1,0 +1,1045 @@
+[
+ {
+  "class": "wildcard",
+  "query": "th*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "an*d",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "fo*r",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "re*f",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "wa*s",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "wi*h",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "fr*m",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "th*t",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "na*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "th*s",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "da*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "al*o",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "fi*t",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "ar*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "hi*s",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "ci*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "no*t",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "on*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "we*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "ha*s",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "bu*t",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "ha*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "pu*r",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "ha*d",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "ac*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "al*l",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "un*d",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "it*s",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "th*r",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "ma*y",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "se*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "be*n",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "st*s",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "th*y",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "mo*e",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "la*t",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "20*0",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard",
+  "query": "20*6",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "mos*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "wor*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "200*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "dur*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "peo*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "yea*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "suc*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "ove*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "can*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "ref*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "cit*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "ame*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "new*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "his*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "mad*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "out*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "use*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "lin*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "sta*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "man*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "pag*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "nat*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "tha*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "thu*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "pla*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "uni*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "ext*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "bet*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "whe*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "rig*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "und*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "the*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "mar*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "boo*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "art*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "kno*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "sty*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "lat*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "thr*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "cat*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "joh*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "par*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "lef*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "dec*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "apr*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "lis*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "sma*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "prefix3",
+  "query": "jan*",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: prefix expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_scan",
+  "query": "c*ment",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_scan",
+  "query": "s*ring",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_scan",
+  "query": "s*face",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_scan",
+  "query": "s*ster",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_scan",
+  "query": "c*tion",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: wildcard expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_scan",
+  "query": "s*read",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_scan",
+  "query": "s*phen",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*sband",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ander",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*utive",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*early",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*omics",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ssion",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*stice",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ially",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*cture",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*mment",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*pring",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*rface",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*arded",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*nutes",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*riend",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*embly",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*idate",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*olden",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*toria",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*essor",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*eally",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ieved",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*orced",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*lican",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ctory",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*aster",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*prove",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ssing",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*known",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*aimed",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*xcept",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*stion",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ectly",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ition",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*sical",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*olina",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*pread",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ality",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ephen",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ridge",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*ience",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*tress",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*holds",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*lysis",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*oming",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*uitar",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "wildcard_lead",
+  "query": "*under",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "regex",
+  "query": "[0-9]{4}",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: regex expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "regex",
+  "query": "(19|20)[0-9]{2}",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: regex expands to 19142195 postings (maximum 5000000)\"}')"
+  }
+ },
+ {
+  "class": "regex",
+  "query": "[0-9]{4}s",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 621962 terms\"}')"
+  }
+ },
+ {
+  "class": "regex",
+  "query": "[0-9]{7}",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: regex expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "regex",
+  "query": "[0-9]{1,3}",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 621962 terms\"}')"
+  }
+ },
+ {
+  "class": "regex",
+  "query": "(re|un)[a-z]*ing",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: regex expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "regex",
+  "query": "[a-f0-9]{8,}",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"Query error: regex expands to more than 1024 terms\"}')"
+  }
+ },
+ {
+  "class": "regex",
+  "query": ".*(tion|sion)",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ },
+ {
+  "class": "regex",
+  "query": ".*0th",
+  "errors": {
+   "summa": "HttpError('HTTP 400: {\"error\":\"IO error: term dictionary scan exceeds 1000000 terms\"}')"
+  }
+ }
+]

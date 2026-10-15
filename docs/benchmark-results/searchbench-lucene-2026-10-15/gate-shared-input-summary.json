@@ -1,0 +1,27 @@
+{
+  "total": 826,
+  "comparison": "shared-input",
+  "included": 677,
+  "counts_agree": 640,
+  "included_by_class": {
+    "high_term": 45,
+    "med_term": 49,
+    "low_term": 47,
+    "and_high_high": 47,
+    "and_high_med": 50,
+    "and_high_low": 50,
+    "or_high_high": 42,
+    "or_high_med": 45,
+    "or_high_low": 46,
+    "high_phrase": 30,
+    "med_phrase": 46,
+    "low_phrase": 50,
+    "high_sloppy_phrase": 7,
+    "med_sloppy_phrase": 27,
+    "low_sloppy_phrase": 37,
+    "wildcard": 11,
+    "prefix3": 2,
+    "wildcard_scan": 42,
+    "regex": 4
+  }
+}

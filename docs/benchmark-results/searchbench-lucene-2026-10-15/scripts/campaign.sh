@@ -18,8 +18,8 @@ for p in $PHASES; do
   if python3 "$SUMMA/scripts/searchbench/campaign.py" measure --engine "$e" --server-pid "$SERVER_PID" \
       --port "$(port_of "$v")" --clients 32 --duration 3 --repetitions 3 --session-warmup 60 \
       --client-cores "$CLIENT_CORES" --comparison shared-input --searchbench "$SB" --out "$d" > "$d/measure.log" 2>&1; then
-    cat /proc/$SERVER_PID/smaps_rollup > "$d/smaps_rollup.txt" || true
-    cat /proc/$SERVER_PID/smaps > "$d/smaps.txt" || true
+    cat /proc/"$SERVER_PID"/smaps_rollup > "$d/smaps_rollup.txt" || true
+    cat /proc/"$SERVER_PID"/smaps > "$d/smaps.txt" || true
     stop_variant "$v"
     date -u +%s > "$d/finished_at"
     echo '{"complete": true}' > "$d/completed.json"

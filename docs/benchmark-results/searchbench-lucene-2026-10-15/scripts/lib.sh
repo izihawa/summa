@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Shared engine control for the 2026-10-15 campaign. Source, do not execute.
 export SB=/mnt/sb/searchbench
 export SUMMA=/mnt/sb/summa
@@ -77,7 +78,7 @@ stop_variant() {
 }
 server_record() {
   local v=$1 out=$2 exe
-  exe=$(readlink -f /proc/$SERVER_PID/exe)
+  exe=$(readlink -f /proc/"$SERVER_PID"/exe)
   python3 - "$v" "$SERVER_PID" "$exe" "$SERVER_CMD" "$(index_of "$v")" > "$out" <<'PY'
 import hashlib, json, os, sys
 v, pid, exe, cmd, idx = sys.argv[1:]
